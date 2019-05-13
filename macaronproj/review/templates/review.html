@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action = "{% url 'review:post_review' %}" method = "POST">
+        {% csrf_token %}
+        <div>
+            <input type = "text" name = "head">
+        </div>
+        <div>
+            <textarea name = "body" cols = 60, rows = 5></textarea>
+            <input type = "submit", value = "Submit">
+        </div>
+    </form>
+
+    <div><h3>리뷰 목록</h3></div>
+    <div>
+        {% for text in review_text.all %}
+        <div class = "container">
+            <h4>{{ text.title }}</h4>
+            <p>{{ text.post_date }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
