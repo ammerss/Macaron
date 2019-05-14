@@ -1,1 +1,19 @@
-<h1>새 가게 등록하는 페이지 입니다.</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New</title>
+</head>
+<body>
+    <h1>새 가게 등록하는 페이지 입니다.</h1>
+    <form method="post" action="{% url 'store:create' %}">
+    {% csrf_token %}
+    이름 : <input type="text" name="name"><br>
+    전화번호(-없이 작성) : <input type="text" name="number"><br>
+    <textarea cols="30" row="10" name="body">소개글을 입력하세요.</textarea><br>
+    <input type="submit", value="제출">
+    </form>
+</body>
+</html>
