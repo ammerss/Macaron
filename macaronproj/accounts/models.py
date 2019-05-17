@@ -1,3 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
-# Create your models here.
+class Client(models.Model):
+    phone = PhoneNumberField(null=False, blank=False, unique=True)
