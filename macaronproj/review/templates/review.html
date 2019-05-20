@@ -10,24 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Document</title>
-    <style>
-            table {
-              width: 100%; height: 200px;
-              border-top : 3px solid #444444;
-              border-bottom: 3px solid #444444;
-              border-collapse: collapse;
-            }
-            th, td {
-              border-bottom: 1px solid #444444;
-              height: 20px;
-              padding: 10px;
-              text-align: center;
-            }
-            th{
-                background-color:lightgrey;
-                border-bottom: 3px solid #444444;
-            }
-          </style>
 </head>
 <body>
 
@@ -35,7 +17,7 @@
     <div class=contianer>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <table id="contents" class="table table-hover" >
-            <thead class="thead-dark">
+            <thead class="thead-dark" style="text-align:center;">
                 <tr>
                     <th>Title</th>
                     <th>Writer</th>
@@ -46,7 +28,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody style="text-align:center;">
                 {% if review_text.all %}
                     {% for text in review_text.all %}
                 <tr>
@@ -55,7 +37,7 @@
                     <td width="200px">{{text.post_date}}</td>
                     <td>{{text.rate}}</td>
                 </tr>
-                <tr id=text.content style="display:none;">
+                <tr id={{text.pk}} style="display:none;">
                     <td colspan="4">{{text.content}}</td>
                 </tr>
                   {% endfor %}
@@ -72,8 +54,8 @@
             {% csrf_token %}
             <div class="container">
                 <textarea name = "head" cols = 120px, rows = 1 placeholder="Write title"></textarea>
-                <textarea name = "body" cols = 120px, rows = 8 placeholder="Write content"></textarea>
-                <input type = "submit", value = "Post", style="height:100px; width:100px;">
+                <textarea name = "body" cols = 120px, rows = 5 placeholder="Write content"></textarea>
+                <input type = "submit", value = "Post", style="height:60px; width:50px;">
             </div>
 
             {% if messages %}
@@ -94,11 +76,11 @@
 <script type="text/javascript">
     $(document).ready(function (obj) {
         $("#viewhidden").click(function () {
-            status = $(this).parents().parent().next('tr').css("display");
+            status = $(this).parent().parent().next().css("display");
             if (status == "none") {
-                $(this).parents().parent().next('tr').css("display", "");
+                $(this).parent().parent().next().css("display", "");
             } else {
-                $(this).parents().parent().next('tr').css("display", "none");
+                $(this).parent().parent().next().css("display", "none");
             }
         });
     });
