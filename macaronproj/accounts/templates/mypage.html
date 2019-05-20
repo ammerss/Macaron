@@ -1,19 +1,16 @@
-<div id="container" class="mypage2016"><!-- Contaner Start -->
-	<h2 class="inTitle">MyPage</h2>
-		<div class="myinfo"> Hello! {{ user.username }}님</div>
-
+<h2 class="inTitle">MyPage</h2>
+	<div class="myinfo"> Hello! {{ user.username }}님</div>
 		<div class="my_link">
-			<p></p>
-			<script>
-				if(user.username == 'minhee0325'){
-					document.write ('<div><a href="/myplus/myreview.php">review list</a></div>');
-				}
-				else{
-					document.write ('<div><a href="/myplus/myreview.php">review list</a></div>');
-				}
-			</script>
-			<div><a href="/myplus/orderlist.php">check reservation</a></div>
-			<div><a href="/accounts/edit">change info</a></div>
-			<div><a href="/myplus/myreview.php">review list</a></div>
-		</div>
-</div><!-- Contaner End -->
+		<p></p>
+		<script>
+			if(user.username == 'minhee0325'){
+				document.write ('<div><a href="/myplus/myreview.php">review list</a></div>');
+			}
+			else{
+				document.write ('<div><a href="/myplus/myreview.php">review list</a></div>');
+			}
+		</script>
+		<div><a href="">check reservation</a></div> <!--예약확인 링크-->
+		<div><a href="/accounts/edit">change info</a></div>
+		<div><a href="">review list</a></div> <!--리뷰리스트 링크-->
+	</div>
