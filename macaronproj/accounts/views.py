@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import Client
@@ -44,4 +44,5 @@ def edit(request):
     return render(request, 'edit.html', {'clients':clients})
 
 def mypage(request):
-    return render(request, 'mypage.html')
+    clients = Client.objects
+    return render(request, 'mypage.html', {'clients':clients})
