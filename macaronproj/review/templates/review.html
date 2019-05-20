@@ -1,33 +1,102 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Document</title>
+    <style>
+            table {
+              width: 100%; height: 200px;
+              border-top : 3px solid #444444;
+              border-bottom: 3px solid #444444;
+              border-collapse: collapse;
+            }
+            th, td {
+              border-bottom: 1px solid #444444;
+              height: 20px;
+              padding: 10px;
+              text-align: center;
+            }
+            th{
+                background-color:lightgrey;
+                border-bottom: 3px solid #444444;
+            }
+          </style>
 </head>
 <body>
-    
-    <form action = "{% url 'review:post_review' %}" method = "POST">
-        {% csrf_token %}
-        <div>
-            <input type = "text" name = "head">
-        </div>
-        <div>
-            <textarea name = "body" cols = 60, rows = 5></textarea>
-            <input type = "submit", value = "Submit">
-        </div>
-    </form>
 
-    <div><h3>리뷰 목록</h3></div>
-    <div>
-        {% for text in review_text.all %}
-        <div class = "container">
-            <h4>{{ text.title }}</h4>
-            <p>{{ text.post_date }}</p>
-        </div>
-        {% endfor %}
+    <div><h3>Review List</h3></div>
+    <div class=contianer>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <table id="contents" class="table" >
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th>Rate</th>
+                </tr>
+                <tr>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if review_text.all %}
+                    {% for text in review_text.all %}
+                <tr>
+                    <td width="400px"><a href="#" id="viewhidden" onclick='return false;' class="button">{{text.title}}</a></td>
+                    <td width="100px">{{text.writer}}</td>
+                    <td width="200px">{{text.post_date}}</td>
+                    <td>{{text.rate}}</td>
+                </tr>
+                <tr id=text.content style="display:none;">
+                    <td colspan="4">{{text.content}}</td>
+                </tr>
+                  {% endfor %}
+                {% else %}
+                 <p>There are no reviews</p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <div><h3>Write your review!</h3></div>
+    <div class="container">
+        <form action = "{% url 'review:post_review' %}" method = "POST">
+            {% csrf_token %}
+            <div class="container">
+                <textarea name = "head" cols = 120px, rows = 1 placeholder="Write title"></textarea>
+                <textarea name = "body" cols = 120px, rows = 8 placeholder="Write content"></textarea>
+                <input type = "submit", value = "Post", style="height:100px; width:100px;">
+            </div>
+
+            {% if messages %}
+            <ul class="messages">
+                 {% for message in messages %}
+                 <script>
+                        alert('{{message}}')
+                </script>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
     </div>
 
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function (obj) {
+        $("#viewhidden").click(function () {
+            status = $(this).parents().parent().next('tr').css("display");
+            if (status == "none") {
+                $(this).parents().parent().next('tr').css("display", "");
+            } else {
+                $(this).parents().parent().next('tr').css("display", "none");
+            }
+        });
+    });
+</script>
