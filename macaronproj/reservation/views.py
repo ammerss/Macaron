@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from .models import reservation
 
-# Create your views here.
+def Reser_owner(request):
+    return render(request, 'list.html')
+
+def Reser_custom(request):
+    return render(request, 'cart.html')
 
 def reservate(request):
     return render(request, 'show.html')

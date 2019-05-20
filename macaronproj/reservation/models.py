@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User, AbstractUser
 
-class Resevation(models.Model):
+class reservation(models.Model):
     reser_num = models.IntegerField(primary_key=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     #shop_name = models.ForeignKey(Store, on_delete=models.CASCADE )
