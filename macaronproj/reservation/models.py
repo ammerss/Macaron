@@ -1,6 +1,6 @@
 from django.db import models
 
-class Resevation(models.Model):
+class reservation(models.Model):
     reser_num = models.IntegerField(primary_key=True)
     customer_name = models.CharField(max_length=128)
     shop_name = models.CharField(max_length=128)
