@@ -5,10 +5,10 @@ class Resevation(models.Model):
     customer_name = models.CharField(max_length=128)
     shop_name = models.CharField(max_length=128)
     macaron_name = models.CharField(max_length=128)
-    macaron_num = models.IntegerField(primary_key=True)
-    macaron_price = models.IntegerField(primary_key=True)
-    reser_date = models.DateTimeField('date published')
-    reser_time = models.DateTimeField('date published')
+    macaron_num = models.IntegerField()
+    macaron_price = models.IntegerField()
+    reser_request_time = models.DateTimeField() #예약 요청 한 시각
+    reser_time = models.DateTimeField(auto_now_add = True) #예약 날짜//픽업날짜
 
 def __str__(self):
         return self.reser_num
