@@ -1,1 +1,34 @@
-<h1>판매자들이 마카롱 정보를 수정하는 페이지 입니다.</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% for macaron in store.macarons_set.all %}
+<p> {{macaron.name}}
+    {{macaron.price}}
+    {{macaron.stock}}
+</p>
+{% endfor %}
+<form action="{% url 'store:edit' store.id %}", method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>
+    이름 : <input type="text" name="title">
+    </p>
+    가격 : <input type="text" name="cost">
+    개수 : <input type="text" name="num">
+	{{form}}
+	<input type="submit" value="등록">
+</form>
+
+{% for macaron in context.macarons_set.all %}
+ {{macaron.name}}
+ {{macaron.price}}
+ {{macaron.stock}}
+{% endfor %}
+    
+</body>
+</html>

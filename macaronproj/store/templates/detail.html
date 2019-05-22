@@ -1,9 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>마카롱 가게 선택하면 나오는 가게 페이지 입니다.</h1>
 
-<h1>마카롱 가게 선택하면 나오는 가게 페이지 입니다.</h1>
+  <p><strong>Name :</strong>{{ store.name }}</a></p> 
+  <p><strong>num :</strong> {{ store.num }}</p>
+  <p><strong>Info :</strong> {{store.content}}</p> 
+  <br><br>
+  {% for macaron in store.macarons_set.all %}
+  <p>{{macaron.name}}
+     {{macaron.price}}
+     {{macaron.stock}}
+  </p>
+  {% endfor %}
+  <a href="{% url 'store:edit' store.id%}">상품 업로드하기</a>
 
-  <p><strong>Name:</strong>{{ store.name }}</a></p> 
-  <p><strong>num:</strong> {{ store.num }}</p>
- 
+</body>
+</html>
 
 
 

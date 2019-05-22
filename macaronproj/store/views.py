@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404,reverse
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views import generic
-from store.models import Store
+from store.models import Store, Macarons
+from .forms import PhotoForm
 
 # Create your views here.
 def home(request):
@@ -9,11 +11,24 @@ def home(request):
     return render(request,'home.html',{'store_list':store_list})
 
 def detail(request,pk):
-    store=Store.objects.get(pk=pk)
+    store=get_object_or_404(Store, pk=pk)
+    #product_list = Macarons.objects.filter(store=store.name)
     return render(request,'detail.html',{'store':store})
 
-def edit(request):
-    return render(request,'edit.html')   
+def edit(request,pk):
+    store = get_object_or_404(Store, pk=pk)
+    if request.method == 'POST':
+        form = PhotoForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save(commit=False)
+            name = request.POST.get('title','')
+            price = request.POST.get('cost','')
+            stock = request.POST.get('num','')
+            content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
+            content.save()
+        return HttpResponseRedirect(reverse('store:detail', args=(pk,)))
+    else:
+        return render(request,'edit.html',{'store':store})   
 
 def new(request):
     return render(request,'new.html')
@@ -26,3 +41,22 @@ def create_store(request):
     store.save()
 
     return redirect ('/store')
+
+# def upload_pic(request,pk):
+#     #content = get_object_or_404(Macarons, pk=pk)
+#     store = get_object_or_404(Store, pk=pk)
+
+    
+#     name = request.POST.get('title','')
+#     price = request.POST.get('cost','')
+#     stock = request.POST.get('num','')
+   
+#     if request.method == 'POST':
+#        # form = PhotoForm(request.POST.get('picture',''))
+#         form = PhotoForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             form.save(commit=False)   
+#             content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
+#             content.save()
+#         return HttpResponseRedirect(reverse('store:edit', args=(pk,)))
+        

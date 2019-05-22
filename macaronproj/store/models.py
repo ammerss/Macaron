@@ -13,18 +13,15 @@ class Store(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse('store:detail',args=[str(self.pk)])
-        
-   
 
-from django.db import models
-
-# Create your models here.
 
 class Macarons(models.Model):
     name=models.CharField(max_length=50)
     price=models.PositiveIntegerField()
     stock=models.IntegerField()
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    picture = models.ImageField(blank=True, upload_to="product/%Y/%m/%d")
+    pic_title=models.TextField(default='')
 
     def __str__(self):
         return self.name

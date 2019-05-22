@@ -6,7 +6,7 @@
 <ul>
   {% for store in store_list %}
   <li>
-    <a href="{{ store.get_absolute_url}}">{{ store.name }}</a> 
+    <a href="{{ store.get_absolute_url }}">{{ store.name }}
   </li>
   {% endfor %}
 </ul>
@@ -16,5 +16,4 @@
 
 <br>
 <a href="{%  url 'store:new' %}">가게등록하기</a><br>
-<a href="{% url 'store:edit' %}">상품 업로드하기</a>
 
