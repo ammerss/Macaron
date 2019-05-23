@@ -7,12 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-{% for macaron in store.macarons_set.all %}
-<p> {{macaron.name}}
-    {{macaron.price}}
-    {{macaron.stock}}
-</p>
-{% endfor %}
+
 <form action="{% url 'store:edit' store.id %}", method="post", enctype="multipart/form-data">
     {% csrf_token %}
     <p>
@@ -20,14 +15,16 @@
     </p>
     가격 : <input type="text" name="cost">
     개수 : <input type="text" name="num">
-	{{form}}
+	{{form.as_p}}
 	<input type="submit" value="등록">
 </form>
-
-{% for macaron in context.macarons_set.all %}
- {{macaron.name}}
- {{macaron.price}}
- {{macaron.stock}}
+<br><br>
+{% for macaron in store.macarons_set.all %}
+    {{macaron.name}}
+    {{macaron.price}}
+    {{macaron.stock}}
+    {% comment %} <img src="{{ macaron.picture.url }}" height=300 alt="마카롱"> {% endcomment %}
+    {{macaron.pic_content}}
 {% endfor %}
     
 </body>

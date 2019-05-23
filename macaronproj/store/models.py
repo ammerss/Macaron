@@ -20,8 +20,8 @@ class Macarons(models.Model):
     price=models.PositiveIntegerField()
     stock=models.IntegerField()
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    picture = models.ImageField(blank=True, upload_to="product/%Y/%m/%d")
-    pic_title=models.TextField(default='')
+    picture = models.ImageField(blank=True, upload_to="pictures/%Y/%m/%d")
+    pic_content=models.TextField(default='')
 
     def __str__(self):
         return self.name

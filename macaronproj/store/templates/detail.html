@@ -13,10 +13,16 @@
   <p><strong>num :</strong> {{ store.num }}</p>
   <p><strong>Info :</strong> {{store.content}}</p> 
   <br><br>
-  {% for macaron in store.macarons_set.all %}
+  {% for macaron in product_list %}
   <p>{{macaron.name}}
      {{macaron.price}}
      {{macaron.stock}}
+     {%if macaron.picture %}
+     <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
+     {{macaron.pic_content}}
+     {% else %}
+     <h5>사진이 없습니다.</h5>
+     {% endif%}
   </p>
   {% endfor %}
   <a href="{% url 'store:edit' store.id%}">상품 업로드하기</a>

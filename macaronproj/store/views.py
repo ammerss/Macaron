@@ -12,23 +12,31 @@ def home(request):
 
 def detail(request,pk):
     store=get_object_or_404(Store, pk=pk)
+    product_list = store.macarons_set.all()
     #product_list = Macarons.objects.filter(store=store.name)
-    return render(request,'detail.html',{'store':store})
+    return render(request,'detail.html',{'product_list':product_list,'store':store})
 
 def edit(request,pk):
-    store = get_object_or_404(Store, pk=pk)
+    store = get_object_or_404(Store,pk=pk)
     if request.method == 'POST':
         form = PhotoForm(request.POST,request.FILES)
         if form.is_valid():
-            form.save(commit=False)
-            name = request.POST.get('title','')
-            price = request.POST.get('cost','')
-            stock = request.POST.get('num','')
-            content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
-            content.save()
-        return HttpResponseRedirect(reverse('store:detail', args=(pk,)))
+           content= form.save(commit=False)
+           name = request.POST.get('title','')
+           price = request.POST.get('cost','')
+           stock = request.POST.get('num','')
+           
+           content.name=name
+           content.price=price
+           content.stock=stock
+           content.store=store
+        #    content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
+           content.save()
+       
+           return render(request,'detail.html', args=(pk,))
     else:
-        return render(request,'edit.html',{'store':store})   
+        form=PhotoForm()
+        return render(request,'edit.html',{'store':store,'form':form})   
 
 def new(request):
     return render(request,'new.html')
