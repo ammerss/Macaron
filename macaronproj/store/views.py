@@ -33,7 +33,7 @@ def edit(request,pk):
         #    content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
            content.save()
        
-           return render(request,'detail.html', args=(pk,))
+           return HttpResponseRedirect(reverse('store:detail', kwargs={'pk': pk}))
     else:
         form=PhotoForm()
         return render(request,'edit.html',{'store':store,'form':form})   
