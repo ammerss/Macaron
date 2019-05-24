@@ -1,4 +1,4 @@
-﻿# Macaron
+﻿# Macaron Reservation Service
 ## If you are a customer, you need to read this.
 You have to log-in our webpage as a customer. Then, choose a macaron shop and reserve macarons that you want! You have to decide when you will pick up the macarons. You can check out this information in detail on your cart page. If shop owner permits your reservation, reservation is done. Don’t forget to pick up the macarons! You can change your reservation schedule only before the shop owner permits the reservation. If it is already permitted, you cannot change the schedule. Also, if you don’t show up at the reservation time, you will get some penalty. So, please don’t forget your reservation!
 
