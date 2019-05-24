@@ -3,5 +3,6 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request):
-    store_list=Store.objects.all()
-    return render(request,'home.html',{'store_list':store_list})
+    # store_list=Store.objects.all()
+    # return render(request,'home.html',{'store_list':store_list})
+    return render(request,'home.html')
