@@ -5,7 +5,7 @@ import store.views
 
 
 app_name="store"
-urlpatterns = [
+urlpatterns = [   
    path('', store.views.home, name='home'),
    path('detail/<int:pk>', store.views.detail, name='detail'),
    path('detail/<int:pk>/edit/', store.views.edit, name='edit'),

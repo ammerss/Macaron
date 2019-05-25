@@ -1,19 +1,39 @@
 <h1>마카롱 가게 리스트 보여주는 메인 페이지 입니다.</h1>
 가게 이름<br>
 
+<form  method="get" action="." >
+  <input class="input_store" type="text" name="search"> 
+  <button class="input_store" type="submit"> Search </button>
+  
+  
+</form>
 
-{% if store_list %}
-<ul>
-  {% for store in store_list %}
-  <li>
+{% if searched_stores %}
+  <p>search results for : {{ query }}</p>
+  {% for store in searched_stores %}
+    <li>
     <a href="{{ store.get_absolute_url }}">{{ store.name }}
-  </li>
+    </li>
+  {% empty %}
+    <p>~!~!~!None found</p>>
   {% endfor %}
-</ul>
-{% else %}
-  <p>There are no stores in db.</p>
-{% endif %}    
 
+
+
+{%else%}
+  {% if store_list %}
+  <ul>
+    {% for store in store_list %}
+    <li>
+      <a href="{{ store.get_absolute_url }}">{{ store.name }}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no stores in db.</p>
+  {% endif %}    
+
+{% endif %}
 <br>
 <a href="{%  url 'store:new' %}">가게등록하기</a><br>
 

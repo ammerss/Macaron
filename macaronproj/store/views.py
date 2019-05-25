@@ -8,7 +8,17 @@ from .forms import PhotoForm
 # Create your views here.
 def home(request):
     store_list=Store.objects.all()
-    return render(request,'home.html',{'store_list':store_list})
+    #return render(request,'home.html',{'store_list':store_list})
+
+    if 'search' in request.GET:
+        query = request.GET['search']  
+        stores = Store.objects.all().filter(name__contains=query)
+        result = stores    
+        return render(request, 'home.html', {'searched_stores' : result, 'query': query })    
+    else:
+        result = None
+        return render(request,'home.html',{'store_list':store_list})
+   
 
 def detail(request,pk):
     store=get_object_or_404(Store, pk=pk)
@@ -68,3 +78,4 @@ def create_store(request):
 #             content.save()
 #         return HttpResponseRedirect(reverse('store:edit', args=(pk,)))
         
+
