@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .models import Client
+from .models import Profile
 
 def signup(request):
     if request.method == 'POST':
@@ -39,10 +39,18 @@ def logout(request):
         return redirect('home')
     return render(request, 'signup.html')
 
+def update_profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    user.profile.phone = 1
+    user.profile.phone = "0109926420"
+    user.save()
+
 def edit(request):
-    clients = Client.objects
-    return render(request, 'edit.html', {'clients':clients})
+    if request.method == 'PUT':
+        profiles = Profile.objects
+    return render(request, 'edit.html', {'profile':profiles})
 
 def mypage(request):
-    clients = Client.objects
-    return render(request, 'mypage.html', {'clients':clients})
+    if request.method == 'GET':
+        profiles = Profile.objects
+    return render(request, 'mypage.html', {'profile':profiles})
