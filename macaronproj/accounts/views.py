@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import Profile
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == 'POST':
@@ -39,18 +40,30 @@ def logout(request):
         return redirect('home')
     return render(request, 'signup.html')
 
+@login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.phone = 1
     user.profile.phone = "0109926420"
     user.save()
 
-def edit(request):
-    if request.method == 'PUT':
-        profiles = Profile.objects
-    return render(request, 'edit.html', {'profile':profiles})
-
-def mypage(request):
+@login_required
+def editmypage(request, pk):
     if request.method == 'GET':
-        profiles = Profile.objects
-    return render(request, 'mypage.html', {'profile':profiles})
+        profile = get_object_or_404(Profile, pk=pk)
+        return render(request, 'editmypage.html', {'profile':profile})
+    
+    elif request.method == 'PUT':
+        profile = get_object_or_404(Profile, pk=pk)
+        user = User.objects.get(pk=pk)
+        user.profile.phone = 1
+        user.profile.phone = "0109926420"
+        user.save()
+        return redirect('mypage/'+pk)
+        # return render(request, 'mypage.html', {'profile':profile})
+
+@login_required
+def mypage(request, pk):
+    if request.method == 'GET':
+        profile = get_object_or_404(Profile, pk=pk)
+        return render(request, 'mypage.html', {'profile':profile})
