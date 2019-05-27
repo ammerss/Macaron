@@ -21,9 +21,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/',include('store.urls', namespace='store')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('store/',include('store.urls', namespace='store')),  
     path('accounts/', include('accounts.urls')),
     path('review/', include('review.urls', namespace = 'review')),
-     path('reservation/', include('reservation.urls', namespace = 'reservation')),
-]
+    path('reservation/', include('reservation.urls', namespace = 'reservation')),
+    ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
