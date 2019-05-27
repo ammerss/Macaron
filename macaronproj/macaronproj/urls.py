@@ -25,4 +25,5 @@ urlpatterns = [
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     path('accounts/', include('accounts.urls')),
     path('review/', include('review.urls', namespace = 'review')),
+     path('reservation/', include('reservation.urls', namespace = 'reservation')),
 ]

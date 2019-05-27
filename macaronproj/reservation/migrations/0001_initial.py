@@ -4,13 +4,14 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-
 class Migration(migrations.Migration):
 
     initial = True
 
     dependencies = [
+
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+
     ]
 
     operations = [
@@ -18,9 +19,14 @@ class Migration(migrations.Migration):
             name='Resevation',
             fields=[
                 ('reser_num', models.IntegerField(primary_key=True, serialize=False)),
+                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('customer_name', models.CharField(max_length=128)),
+                ('shop_name', models.CharField(max_length=128)),
+                ('macaron_name', models.CharField(max_length=128)),
+                ('macaron_num', models.IntegerField()),
+                ('macaron_price', models.IntegerField()),
                 ('reser_request_time', models.DateTimeField()),
                 ('reser_time', models.DateTimeField(auto_now_add=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

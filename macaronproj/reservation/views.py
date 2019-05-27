@@ -1,8 +1,18 @@
 from django.shortcuts import render
+from .models import Reservation
+from django.http import HttpResponseRedirect
 
-# Create your views here.
+def Reser_owner(request):
+    return render(request, 'list.html')
 
-@login_required
+def Reser_custom(request):
+    return render(request, 'cart.html')
+
+def reserve(request):#, pk):
+    #store = get_object_or_404(Store, pk=pk)
+    return render(request, 'show.html')
+
+
 def request_reservation(request):
 
     customer = request.user
@@ -21,3 +31,6 @@ def request_reservation(request):
             reser.product = product
             reser.reser_request_time = reser_request_time
             reser.reser_time = reser_time
+            return HttpResponseRedirect('/reserve')
+
+    return HttpResponseRedirect('/reserve')
