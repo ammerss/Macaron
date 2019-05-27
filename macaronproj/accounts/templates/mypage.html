@@ -1,1 +1,19 @@
-<h1>로그인 정보를 볼 수 있는 마이페이지 입니다.</h1>
+<h2 class="inTitle">MyPage</h2>
+	{% if profile.user_type %}
+	<div class="myinfo"> Hello! {{profile.user.username}} 판매자님</div>
+		<div class="my_link">
+		<p></p>
+		<div><a href="">change store information</a></div> <!--가게정보변경-->
+		<div><a href="">check reservation</a></div> <!--예약확인 링크-->
+		<div><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
+		<div><a href="">review list</a></div> <!--리뷰리스트 링크-->
+	</div>
+	{% else %}
+	<div class="myinfo"> Hello! {{profile.user.username}} 손님</div>
+		<div class="my_link">
+		<p></p>
+		<div><a href="">check reservation</a></div> <!--예약확인 링크-->
+		<div><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
+		<div><a href="">review list</a></div> <!--리뷰리스트 링크-->
+	</div>
+	{% endif %}

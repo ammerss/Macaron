@@ -1,0 +1,60 @@
+<h2 class="inTitle">Edit</h2> 
+    <form action="{% url 'editmypage' profile.user.id %}" method = "PUT">
+   <div class="my_infobox">
+        <table width="100%" cellpadding="3%" cellspacing="0" summary="회원정보를 나타낸 표">
+            <colgroup>
+                <col style="width:12%">
+                <col style="width:38%">
+                <col style="width:12%">
+                <col style="width:38%">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td colspan="3"><input type="text" title="아이디를 입력하세요" value= {{profile.user.username}} class="t_input" disabled=""> <span>Can't change</span></td>
+
+                </tr>
+                                        
+                    <tr>
+                        <th scope="row">New Password</th>
+                        <td><input type="password" name="passwd" title="비밀번호를 다시 입력하세요" class="t_input"></td>
+                        <th scope="row">New Password Check</th>
+                        <td><input type="password" name="repasswd" title="비밀번호를 다시 입력하세요" class="t_input"></td>
+                    </tr>
+                                    <tr>
+                    <th scope="row">Name</th>
+                    <td colspan="3"><input type="text" title="이름을 입력하세요" class="t_input" value="이민희" disabled="disabled"> <span>Can't change</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone Number</th>
+                    <td colspan="3">
+                        <input type="text" name="phone1" class="t_input small" maxlength="3" value="02"> -
+                        <input type="text" name="phone2" class="t_input small" maxlength="4" value="351"> -
+                        <input type="text" name="phone3" class="t_input small" maxlength="4" value="4989">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">E-mail</th>
+                    <td colspan="3">
+                                                        <input type="text" class="t_input" value="1998년 03월 25일" disabled="">
+                            <span>Can't change</span>
+                                                </td>
+                </tr>
+            </tbody>
+        </table>
+        {% if profile.user_type %}
+            <input type="radio" name="type" value="owner" checked> Owner<br>
+            <input type="radio" name="type" value="customer" > Customer<br>
+        {% else %}
+            <input type="radio" name="type" value="owner"> Owner<br>
+            <input type="radio" name="type" value="Customer" checked> Customer<br>
+	    {% endif %}        
+
+    </div>
+    <p></p>
+
+    <div class="btn_center">
+        <input type="submit" value="Submit">
+        </form>
+        <a href="/accounts/mypage/">cancel</a>
+    </div>
