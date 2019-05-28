@@ -10,6 +10,10 @@ class Profile(models.Model):
                         help_text = 'Flag if user is owner = true' )
     phone = PhoneNumberField(null=False, blank=False, unique=True)
 
+    def get_phone_num(self):
+        phone_num = self.phone.__unicode__()
+        return phone_num[3:]
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 def signup(request):
     if request.method == 'POST':
@@ -41,29 +42,39 @@ def logout(request):
     return render(request, 'signup.html')
 
 @login_required
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    user.profile.phone = 1
-    user.profile.phone = "0109926420"
+def update_profile(request, pk):
+    profile = Profile.objects.get(pk=pk)
+    user = User.objects.get(pk=pk)
+    profile.phone = "0109926420"
     user.save()
+    profile.save()
+    
 
 @login_required
 def editmypage(request, pk):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        if request.POST['passwd'] == request.POST['repasswd']:
+            try:
+                user = User.objects.get(username=request.POST['username'])
+                return redirect('/')
+                # return render(request, 'signup.html', {'error': 'Username has already been taken'})
+            except User.DoesNotExist:
+                user = User.objects.create_user(
+                    request.POST['username'], password=request.POST['passwd'])
+                auth.login(request, user)
+                return redirect('/')
+        else:
+            return render(request, 'editmypage.html', {'error': 'Passwords must match'})
+    else:
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'editmypage.html', {'profile':profile})
-    
-    elif request.method == 'PUT':
-        profile = get_object_or_404(Profile, pk=pk)
-        user = User.objects.get(pk=pk)
-        user.profile.phone = 1
-        user.profile.phone = "0109926420"
-        user.save()
-        return redirect('mypage/'+pk)
-        # return render(request, 'mypage.html', {'profile':profile})
 
 @login_required
 def mypage(request, pk):
     if request.method == 'GET':
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'mypage.html', {'profile':profile})
+
+@csrf_exempt
+def contact(request):
+    return HttpResponse('Hello world')
