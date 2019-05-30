@@ -4,7 +4,6 @@ from django.contrib import auth
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .form import ProfileEdit
 
 def signup(request):
     if request.method == 'POST':
@@ -43,22 +42,21 @@ def logout(request):
     return render(request, 'signup.html')
 
 @login_required
-def update_profile(request, pk):
-    profile = Profile.objects.get(pk=pk)
-    user = User.objects.get(pk=pk)
-    profile.phone = "0109926420"
-    user.save()
-    profile.save()
-    
-
-@login_required
 def editmypage(request, pk):
     if request.method == 'POST':
-        form = ProfileEdit(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return redirect('home')
+        if request.POST['passwd'] == request.POST['repasswd']:
+            user = User.objects.get(username=request.POST['username'])
+            if request.POST['type'] == "customer":
+                user.profile.user_type = False
+            else:
+                user.profile.user_type = True
+            user.password = request.POST['passwd']
+            user.profile.name = request.POST['name']
+            user.profile.phone = request.POST['phone']
+            user.save()
+            return redirect('/')
+        else:
+            return render(request, 'signup.html')
     else:
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'editmypage.html', {'profile':profile})
