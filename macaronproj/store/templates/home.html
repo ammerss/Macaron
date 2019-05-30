@@ -4,6 +4,10 @@
 <a href = "{% url 'login' %}">로그인</a>
 {% if user.is_authenticated %}
     {{user.username}}님 환영합니다~
+    <form action = "{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="로그아웃">
+    </form>
 {% else %}
     로그인해주3
 {% endif %}
