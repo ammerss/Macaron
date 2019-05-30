@@ -2,3 +2,8 @@
 
 <a href = "{% url 'signup' %}">회원가입</a>
 <a href = "{% url 'login' %}">로그인</a>
+{% if user.is_authenticated %}
+    {{user.username}}님 환영합니다~
+{% else %}
+    로그인해주3
+{% endif %}

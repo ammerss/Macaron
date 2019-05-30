@@ -1,24 +1,39 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-<<<<<<< HEAD
 from .forms import SignupForm
-=======
 from .models import Profile
 from django.contrib.auth.decorators import login_required
->>>>>>> 00a29c4fff0b54a9642fc91360022187a7c3db3d
+
+def update_profile(request, user_id):
+    user_data = User.objects.get(pk=user_id)
 
 def signup(request):
     if request.method == 'POST':
-        signupform = SignupForm(request.POST)
-        if signupform.is_valid():
-            user = signupform.save(commit=False)
-            user.email = signupform.cleaned_data['email']
-            user.save()
-            return redirect('home')
-    else:
-        signupform = SignupForm()
-        return render(request, 'signup.html', {'signupform':signupform})
+        if request.POST['password1'] == request.POST['password2']:
+            user_data = User.objects.create_user(request.POST['username'],password=request.POST['password1'])
+            user_data.save()
+            if request.POST['type'] == "customer":
+                user_data.profile.user_type = False
+            else:
+                user_data.profile.user_type = True
+            user_data.profile.name = request.POST['name']
+            user_data.profile.phone = request.POST['tel']
+            user_data.profile.email = request.POST['email']
+            user_data.save() 
+            auth.login(request,user_data)
+            return redirect('/')
+        else:
+            return render(request, 'signup.html')
+
+
+
+    else:   
+        return render(request, 'signup.html')
+
+    # else:
+    #     signupform = Profile()
+    #     return render(request, 'signup.html', {'signupform':signupform})
 
     # if request.method == 'POST':
     #     if request.POST['password1'] == request.POST['password2']:
@@ -54,8 +69,6 @@ def logout(request):
         auth.logout(request)
         return redirect('home')
     return render(request, 'signup.html')
-<<<<<<< HEAD
-=======
 
 @login_required
 def update_profile(request, user_id):
@@ -84,4 +97,3 @@ def mypage(request, pk):
     if request.method == 'GET':
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'mypage.html', {'profile':profile})
->>>>>>> 00a29c4fff0b54a9642fc91360022187a7c3db3d
