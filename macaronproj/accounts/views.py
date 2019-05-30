@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .forms import SignupForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 
@@ -25,9 +24,6 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'signup.html')
-
-
-
     else:   
         return render(request, 'signup.html')
 
@@ -70,10 +66,9 @@ def editmypage(request, pk):
         user.profile.phone = "0109926420"
         user.save()
         return redirect('mypage/'+pk)
-        # return render(request, 'mypage.html', {'profile':profile})
 
 @login_required
-def mypage(request, pk):
+def mypage(request, user_id):
     if request.method == 'GET':
-        profile = get_object_or_404(Profile, pk=pk)
+        profile = get_object_or_404(Profile, pk=user_id)
         return render(request, 'mypage.html', {'profile':profile})
