@@ -55,13 +55,14 @@ def editmypage(request, pk):
                 user.profile.user_type = False
             else:
                 user.profile.user_type = True
-            user.password = request.POST['passwd']
+            user.set_password(request.POST['passwd'])
             user.profile.name = request.POST['name']
             user.profile.phone = request.POST['phone']
             user.save()
             return redirect('/')
         else:
-            return render(request, 'editmypage.html')
+            profile = get_object_or_404(Profile, pk=pk)
+            return render(request, 'editmypage.html', {'profile':profile})
     else:
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'editmypage.html', {'profile':profile})
