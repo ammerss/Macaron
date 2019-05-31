@@ -56,6 +56,7 @@ def create_store(request):
     store.name=request.POST['name']
     store.num=request.POST['number']
     store.content=request.POST['body']
+    store.owner=request.user
     store.save()
 
     return redirect ('/store')
