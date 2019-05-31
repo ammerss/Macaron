@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'reservation.apps.ReservationConfig',
     'review.apps.ReviewConfig',
     'store.apps.StoreConfig',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
