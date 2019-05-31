@@ -67,7 +67,7 @@ def editmypage(request, pk):
         return render(request, 'editmypage.html', {'profile':profile})
 
 @login_required
-def mypage(request, pk):
+def mypage(request, user_id):
     if request.method == 'GET':
-        profile = get_object_or_404(Profile, pk=pk)
+        profile = get_object_or_404(Profile, pk=user_id)
         return render(request, 'mypage.html', {'profile':profile})
