@@ -24,18 +24,18 @@
                     </tr>
                                     <tr>
                     <th scope="row">Name</th>
-                    <td colspan="3"><input type="name" title="이름을 입력하세요" class="t_input" value= {{profile.user.first_name}} disabled="disabled"> <span></span></td>
+                    <td colspan="3"><input type="name" name="name" title="이름을 입력하세요" class="t_input" value= {{profile.name}}> <span></span></td>
                 </tr>
                 <tr>
                     <th scope="row">Phone Number</th>
                     <td colspan="3">
-                        <input type="text" name="phone" class="t_input small" maxlength="3" value=0{{profile.get_phone_num}}> 
+                        <input type="text" name="phone" class="t_input small" value={{profile.phone}}> 
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">E-mail</th>
                     <td colspan="3">
-                                                        <input type="text" class="t_input" value={{profile.user.email}} disabled="">
+                                                        <input type="text" class="t_input" value={{profile.email}} disabled="">
                             <span></span>
                                                 </td>
                 </tr>
@@ -54,6 +54,6 @@
     
     <div class="btn_center">
             <input class="btn_s" type="submit" value="Submit">
+            <div><a href="/accounts/mypage/{{profile.user.id}}">Cancle</a></div>
     </form>
-        <input class="btn_c" type="submit" value="Cancle">
     </div>

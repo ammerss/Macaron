@@ -50,7 +50,7 @@ def logout(request):
 def editmypage(request, pk):
     if request.method == 'POST':
         if request.POST['passwd'] == request.POST['repasswd']:
-            user = User.objects.get(username=request.POST['username'])
+            user = User.objects.get(id=pk)
             if request.POST['type'] == "customer":
                 user.profile.user_type = False
             else:
@@ -61,7 +61,7 @@ def editmypage(request, pk):
             user.save()
             return redirect('/')
         else:
-            return render(request, 'signup.html')
+            return render(request, 'editmypage.html')
     else:
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'editmypage.html', {'profile':profile})
