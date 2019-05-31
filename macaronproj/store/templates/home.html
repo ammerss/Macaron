@@ -12,3 +12,41 @@
 {% else %}
     로그인해주3
 {% endif %}
+가게 이름<br>
+
+<form  method="get" action="." >
+  <input class="input_store" type="text" name="search"> 
+  <button class="input_store" type="submit"> Search </button>
+  
+  
+</form>
+
+{% if searched_stores %}
+  <p>search results for : {{ query }}</p>
+  {% for store in searched_stores %}
+    <li>
+    <a href="{{ store.get_absolute_url }}">{{ store.name }}
+    </li>
+  {% empty %}
+    <p>~!~!~!None found</p>>
+  {% endfor %}
+
+
+
+{% else %}
+  {% if store_list %}
+  <ul>
+    {% for store in store_list %}
+    <li>
+      <a href="{{ store.get_absolute_url }}">{{ store.name }}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no stores in db.</p>
+  {% endif %}    
+
+{% endif %}
+<br>
+<a href="{%  url 'store:new' %}">가게등록하기</a><br>
+
