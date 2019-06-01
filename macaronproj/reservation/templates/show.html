@@ -19,29 +19,34 @@
             alt="No Image" style="height:100%; width:20%; float:left;">
 
         <div style="height:100%; width:80%; float:left;">
-            <h3>Shop Name</h3><br>
-            <p>//shop information//</p>
+            <h3>Shop Name: {{store.name}}</h3><br>
+            <p>Shop information</p>
+            <p>{{store.content}}</p>
         </div>
 
     </header>
     <hr>
 
     <div class="body">
-        <form action="{% url 'reservation:request_reservation' %}"
+        <form action="{% url 'reservation:request_reservation' store.id%}"
               method = "POST">
               {% csrf_token %}
               <fieldset>
                   <legend><h3>Reserve Macarons</h3></legend>
                     <h3>[ Macarons ]</h3>
-            <!---for로 반복-->
+                {% if product_list %}
+                {% for macaron in product_list %}
                     <p>
-                     Macaron Name: "macaron type" &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" min="0" max="30" step="1">
+                      Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="macaron" min="0" max="30" step="1">
                     </p>
-            <!---end for--->
+                {% endfor %}
+                {% else %}
+                    <p>No macaron available for reservation!TT</p>
+                {% endif %}
                     <br><br>
                     <h3>[ Information for Reservation ]</h3>
                     <label>
-                        Pickup Date: <input type="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time">
+                        Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time">
                     </label>
                 </fieldset>
             <input type="submit" value="Reserve!" style="height:50px; width:100px;">
