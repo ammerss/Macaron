@@ -1,4 +1,4 @@
-<h1>소비자들의 예약확인 페이지 입니다.</h1>
+<h1>{{profile.user.username}} 손님의 예약확인 페이지입니다.</h1>
 
     <div class="titleArea">
         <h2>마카롱 예약확인</h2>
@@ -20,27 +20,42 @@
                 <col style="width:100px;">
                 <col style="width:100px;">
                 <col style="width:100px;">
-                <col style="width:135px;">
                 <col style="width:100px;">
                 <col style="width:100px;">
-                <col style="width:135px;">
-                <col style="width:135px;">
+                <col style="width:145px;">
                 <col style="width:135px;">
     </colgroup>
     <thead><tr>
     <th scope="col">주문번호</th>
     <th scope="col">마카롱 가게명</th>
     <th scope="col">마카롱 이름</th>
-    <th scope="col">이미지</th>
     <th scope="col">구매 수량</th>
     <th scope="col">구매 금액</th>
-    <th scope="col">방문예정날짜</th>
-    <th scope="col">방문예정시각</th>
+    <th scope="col">방문예정날짜/시각</th>
     <th scope="col">승인처리상태</th>
     </tr></thead>
     <tbody class="center ">
-    
+        {% if reservation_list %}
+            {% for reservation in reservation_list%}
+            <thead><tr>
+                <th scope="col">{{reservation.reser_num}}</th>
+                <th scope="col">{{reservation.shop_name}}</th>
+                <th scope="col">{{reservation.choice_macaron}}</th>
+                <th scope="col">{{reservation.quantity}}</th>
+                <th scope="col">{{reservation.amount}}</th>
+                <th scope="col">{{reservation.reser_time}}</th>
+                <th scope="col"> 
+                        {% if reservation.approve %}
+                        O
+                        {% else %}
+                        X 
+                        {%endif%}
+                    </th>
+                </tr></thead>
+            {%endfor%}
+        {% else %}
+        <p class="message displaynone">주문 내역이 없습니다.</p>
+        {% endif %}     
     </tbody>
     </table>
-    <p class="message displaynone">주문 내역이 없습니다.</p>
     </div>
