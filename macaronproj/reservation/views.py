@@ -5,6 +5,7 @@ from reservation.models import Reservation
 from store.models import Store, Macarons
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 from django.contrib import messages
 import datetime
 
