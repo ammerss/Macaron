@@ -20,12 +20,22 @@ def request_reservation(request, pk):
     customer = request.user
     shop_name = get_object_or_404(Store, pk=pk)
     quantity = request.POST.get('quantity')
-    macaron = ''
+    if(quantity == 0):
+        messages.error(request, 'ERROR: Please fill the form of COUNT')
+        return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
+    macaron = request.POST.get('choice')
+    if( not macaron):
+        messages.error(request, 'ERROR: Please choice MACARON TYPE!')
+        return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
     reser_request_time = timezone.datetime.now()
     #convert date value and time value to Datetime form
+    if(request.POST.get('date')=='' or request.POST.get('time')==''):
+        messages.error(request, 'ERROR: Please fill the form of DATE and TIME')
+        return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
     date = datetime.datetime.strptime(request.POST.get('date'), "%Y-%m-%d").date()
     time = datetime.datetime.strptime(request.POST.get('time'), "%H:%M").time()
     reser_time = datetime.datetime.combine(date, time)
+
 
     if request.method == 'POST':
         reservation = Reservation()

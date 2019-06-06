@@ -1,20 +1,34 @@
-<h1>{{profile.user.username}} 판매자님의 예약현황 확인페이지입니다.</h1>
+{% extends 'base.html' %}
 
-    <div class="titleArea">
-        <h2>마카롱 예약현황</h2>
-    </div>
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+
+    {% block content %}
+
+    <section id="features">
+        <div class="container">
+            <header>
+                <h2>Reservation lists of the Store of <strong>{{profile.user.username}}</strong></h2>
+            </header>
+                <div class="row aln-center">
+                <div class="col-12">
     
-    <li>최근 3개월간의 자료를 조회하실 수 있습니다.</li>
-    <li class="displaynone">오너의 승인 이후 주문이 정상적으로 완료되니 승인여부를 꼭 확인해주시기 바랍니다.</li>
-        </ul>
-    </div>
+    
+        <header>
+            <h3>check whether you approve reservation!
+            </h3>
+        </header>
+        <p>Without shop owner's approval, reservation is not done.
+            so check approval of reservation.</p>
+
+        </div>
     <input id="mode" name="mode" value="" type="hidden">
     <input id="term" name="term" value="" type="hidden">
     </form>
    
-    <div class="title">
-            <h3>예약 상품 정보</h3>
-        </div>
+    <div class="container">
+        <div class="row aln-center">
     <table border="1" summary="">
         <colgroup>
             <col style="width:100px;">
@@ -27,13 +41,13 @@
         </colgroup>
             
     <thead><tr>
-    <th scope="col"> 주문번호 </th>
-    <th scope="col"> 주문자 이름 </th>
-    <th scope="col"> 마카롱 이름 </th>
-    <th scope="col"> 구매 수량 </th>
-    <th scope="col"> 구매 금액 </th>
-    <th scope="col">  방문예정날짜/시각  </th>
-    <th scope="col"> 승인처리유무 </th>
+    <th scope="col"> number </th>
+    <th scope="col"> customer name </th>
+    <th scope="col"> macaron name </th>
+    <th scope="col"> how many </th>
+    <th scope="col"> price </th>
+    <th scope="col">  due date and time  </th>
+    <th scope="col"> approval </th>
     </tr></thead>
     <tbody class="center ">
     {% if reservation_list %}
@@ -47,18 +61,22 @@
             <th scope="col">{{reservation.reser_time}}</th>
             <th scope="col">
                 {% if reservation.approve %}
-                    승인 완료
+                    approval is done.
                 {% else %}
                 <form action="{% url 'reservation:request_approve' reservation.reser_num%}" method = "POST">
                 {% csrf_token %}
-                <input type="submit" value="예약승인" style="height:30px; width:70px;">
+                <input type="submit" value="approve" style="height:30px; width:140px;">
                 {% endif %}
                 </th>
             </tr></thead>
         {% endfor %}
     {% else %}
-    <p class="message displaynone">주문 내역이 없습니다.</p>
+    <p class="message displaynone">There is no reservation.</p>
     {% endif %}  
     </tbody>
     </table>
     </div>
+    </div>
+    {% endblock %}
+
+</html>    
