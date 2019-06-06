@@ -53,13 +53,12 @@
 									<!-- Feature -->
 									
 										<section>
-											<a href="#" class="image featured"><img src="{% static 'images/pic02.jpg' %}" alt="" /></a>
+											
+											<a href="{{ store.get_absolute_url }}" class="image featured"><img src="{% static 'images/pic02.jpg' %}" alt="" >
 											<header>
-												<h3>Nice! What is HTML5 UP?</h3>
-											</header>
-											<p><a href="http://html5up.net">HTML5 UP</a> is a side project of <a href="http://twitter.com/ajlkn">AJ’s</a> (= me).
-											I started it as a way to both test my responsive tools and sharpen up my coding
-											and design skills a bit.</p>
+												<h3>{{ store.name }}</h3>
+											</header></a>
+											
 										</section>
 	
 								</div>
@@ -69,15 +68,15 @@
 							{% else %}
 								{% if store_list %}
 							  {% for store in store_list %}
-							 <div  class="col-4 col-12-small">
+							 <div  class="col-4 col-6-medium col-12-small">
 
 									<!-- Feature -->
 									
 										<section>
-											<a href="#" class="image featured"><img src="{% static 'images/pic02.jpg' %}" alt="" /></a>
+											<a href="{{ store.get_absolute_url }}" class="image featured"><img src="{% static 'images/pic02.jpg' %}" alt="" >
 											<header>
-													<a href="{{ store.get_absolute_url }}">{{ store.name }}
-											</header>
+													{{ store.name }}
+											</header></a>
 										</section>
 	
 								</div>
@@ -128,7 +127,7 @@
 													<!-- Highlight -->
 														<article class="box highlight">
 															<header>
-																<h3><a href="#">Something of less note</a></h3>
+																<h3><a href="#">아니왜</a></h3>
 															</header>
 															<a href="#" class="image left"><img src="{% static 'images/pic07.jpg' %}" alt="" /></a>
 															<p>이걸 지우면 밑에 contacts 가 이상해지는데 왜일까</p>
