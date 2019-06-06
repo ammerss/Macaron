@@ -1,20 +1,31 @@
-<h1>{{profile.user.username}} 손님의 예약확인 페이지입니다.</h1>
+{% extends 'base.html' %}
 
-    <div class="titleArea">
-        <h2>마카롱 예약확인</h2>
-    </div>
-    
-    <li>최근 3개월간의 자료를 조회하실 수 있습니다.</li>
-    <li class="displaynone">취소/교환/반품 신청은 오너의 승인 이후 불가합니다.</li>
-        </ul>
-    </div>
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+
+    {% block content %}
+
+    <section id="features">
+        <div class="container">
+            <header>
+                <h2>Reservation lists of <strong>{{profile.user.username}}</strong></h2>
+            </header>
+                <div class="row aln-center">
+                        <div class="col-12">
+            <header>
+                <h3>check approval of your reservation!</h3>
+            </header>
+                <p><strong>Without shop owner's approval, reservation is not done. 
+                        so check approval of your reservation. After approval, you can't change it.</strong></p>
+        </div>
+
     <input id="mode" name="mode" value="" type="hidden">
     <input id="term" name="term" value="" type="hidden">
     </form>
 
-    <div class="title">
-            <h3>주문 상품 정보</h3>
-        </div>
+    <div class="container">
+        <div class="row aln-center">
     <table border="1" summary="">
             <colgroup>
                 <col style="width:100px;">
@@ -26,13 +37,13 @@
                 <col style="width:135px;">
     </colgroup>
     <thead><tr>
-    <th scope="col">주문번호</th>
-    <th scope="col">마카롱 가게명</th>
-    <th scope="col">마카롱 이름</th>
-    <th scope="col">구매 수량</th>
-    <th scope="col">구매 금액</th>
-    <th scope="col">방문예정날짜/시각</th>
-    <th scope="col">승인처리상태</th>
+    <th scope="col">number</th>
+    <th scope="col">store name</th>
+    <th scope="col">macaron name</th>
+    <th scope="col">how many</th>
+    <th scope="col">price</th>
+    <th scope="col">due date and time</th>
+    <th scope="col">approval</th>
     </tr></thead>
     <tbody class="center ">
         {% if reservation_list %}
@@ -54,8 +65,11 @@
                 </tr></thead>
             {%endfor%}
         {% else %}
-        <p class="message displaynone">주문 내역이 없습니다.</p>
+        <p class="message displaynone">There is no reservation.</p>
         {% endif %}     
     </tbody>
     </table>
     </div>
+    </div>
+    {% endblock %}
+</html>  
