@@ -50,7 +50,10 @@
           </section>
          
       </div>
-      {% endfor %}
+         {% endfor %}
+         {%if not product_list %}
+         <p>There are no macarons yet!</p>
+         {% endif %}
       
       
       <div class="col-12">
