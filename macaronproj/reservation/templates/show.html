@@ -1,92 +1,85 @@
+{% extends 'base.html' %}
+
 {% load staticfiles %}
-<!DOCTYPE html>
-{% if error %}
-    {{ error }}
-    <br><br>
-{% endif %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
-    <title>Document</title>
-</head>
-<body class="homepage">
-    <div class="page-wrapper">
-        <section id="header">
-            <div>
-                <header><h2>Shop Information</h2></header>
-                <!----
-                <a href="#" class="image left">
-                    <img src="https://us.123rf.com/450wm/mariaaverburg/mariaaverburg1702/mariaaverburg170200213/72311757-%EB%A7%88%EC%B9%B4%EB%A1%B1%EC%9D%84-%EB%84%A3%EC%9D%80-%EC%83%9D%EC%9D%BC-%EC%B9%B4%EB%93%9C.jpg?ver=6"
-                        alt="No Image" style="height:200px; width:200px;">
-                </a>-->
-        
-                <p class="row.aln-middle">
-                    <h2>Shop Name: {{store.name}}</h2>
-                    <strong>Shop information </strong>
-                    <hr>
-                    {{store.content}}
-                </p>
-            </div>
-        </section>
-    <hr>
+<!DOCTYPE HTML>
+<html>
 
-    <section id="main">
-       <div class="container">
-           <article class="box post">
-               <header>
-                   <h2>Reserve Macaron!</h2>
-                </header>
+{% block content %}
 
-                <form action="{% url 'reservation:request_reservation' store.id%}" method="POST">
-                    {% csrf_token %}
-
-                    <div class="container">
-                        <h3>Choose Type of Macaron!</h3>
-                        {%if product_list%}
-                        {% for macaron in product_list %}
-                        {%if macaron.picture %}
-                        <p>
-                         <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
-                            {{macaron.pic_content}}
-                        {% else %}
-                            <h5>no image</h5>
-                         {% endif%}
-                                <h3><input type="checkbox" name="choice" value={{macaron.name}}>Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="quantity" min="0" max="30" step="1"></h3>
-                            </p>
-                        {% endfor %}
-                        {% else %}
-                            <p>No macaron for reservation! TT</p>
-                        {% endif%}
-
-                        <br><br>
-                        
-                        <h2>Choose Date & Time to Pick Up!</h2>
-                       
-                        <label>
-                                Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time">
-                        </label>
-
-                        </div>
-                        <div>
-                            
-                            <input type="submit" value="Reserve!">
-                        </div>
-                        {% if messages %}
-                        <ul class="messages">
-                             {% for message in messages %}
-                             <script>
-                                    alert('{{message}}')
-                            </script>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                </form>
-            </article>
-       </div>
+<section id="header">
+        <div>
+            <header><h2>Shop Information</h2></header>
+            <!----
+            <a href="#" class="image left">
+                <img src="https://us.123rf.com/450wm/mariaaverburg/mariaaverburg1702/mariaaverburg170200213/72311757-%EB%A7%88%EC%B9%B4%EB%A1%B1%EC%9D%84-%EB%84%A3%EC%9D%80-%EC%83%9D%EC%9D%BC-%EC%B9%B4%EB%93%9C.jpg?ver=6"
+                    alt="No Image" style="height:200px; width:200px;">
+            </a>-->
+    
+            <p class="row.aln-middle">
+                <h2>Shop Name: {{store.name}}</h2>
+                <strong>Shop information </strong>
+                <hr>
+                {{store.content}}
+            </p>
+        </div>
     </section>
-    </div>
-</body>
+<hr>
+
+<section id="main">
+   <div class="container">
+       <article class="box post">
+           <header>
+               <h2>Reserve Macaron!</h2>
+            </header>
+
+            <form action="{% url 'reservation:request_reservation' store.id%}" method="POST">
+                {% csrf_token %}
+
+                <div class="container">
+                    <h2>Choose Type of Macaron!</h2>
+                    {%if product_list%}
+                    {% for macaron in product_list %}
+                    {%if macaron.picture %}
+                    <p>
+                     <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
+                        {{macaron.pic_content}}
+                    {% else %}
+                        <h5>no image</h5>
+                     {% endif%}
+                            <h3><input type="checkbox" name="choice" value={{macaron.name}}>Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="quantity" min="0" max="30" step="1"></h3>
+                        </p>
+                    {% endfor %}
+                    {% else %}
+                        <p>No macaron for reservation! TT</p>
+                    {% endif%}
+
+                    <br><hr>
+                    
+                    <h2>Choose Date & Time to Pick Up!</h2>
+                   
+                    <label>
+                           <p> Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time"></p>
+                    </label>
+
+                    </div>
+                    <div>
+                        <p>
+                        <input type="submit" value="Reserve!">
+                        </p>
+                    </div>
+                    {% if messages %}
+                    <ul class="messages">
+                         {% for message in messages %}
+                         <script>
+                                alert('{{message}}')
+                        </script>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            </form>
+        </article>
+   </div>
+</section>
+{% endblock %}
+
 </html>
