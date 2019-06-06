@@ -1,4 +1,5 @@
 
+{% extends "base.html" %}
 {%load staticfiles%}
 <!DOCTYPE html>
 <html lang="en">
@@ -13,16 +14,17 @@
   <title>Document</title>
 </head>
 <div id="page-wrapper">
+    {%block logoname %}{{ store.name }}{%endblock%}
+    {% block logo_script %}
+    <p> {{ store.num }}</p>
+    <p>{{store.content}}</p>
+    {% endblock %}
 {% block content %}
 
 <!-- Features -->
 <section id="features">
   <div class="container">
-    <header>
-      <h2> <strong>{{ store.name }} :)</strong></h2>
-      <p> {{ store.num }}<strong></strong></p>
-      <p>{{store.content}}</p>
-    </header>
+    
     <div class="row">
       
     <div class="row aln-center">
