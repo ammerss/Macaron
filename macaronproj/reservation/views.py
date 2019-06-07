@@ -4,8 +4,9 @@ from django.utils import timezone
 from reservation.models import Reservation
 from store.models import Store, Macarons
 from django.contrib.auth.models import User
+from django.contrib import auth
+from accounts.models import Profile
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
 from django.contrib import messages
 import datetime
 
@@ -54,9 +55,10 @@ def request_reservation(request, pk):
     return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
 def Reser_owner(request,pk):
-    stores = Store.objects.all().filter(owner=profile.user)
-    reservation_list = stores.reservation_set.all()
-    return render(request, 'list.html', {'reservation_list': reservation_list, 'stores': stores})
+    owner = get_object_or_404(User, pk=pk)
+    shop_name = get_object_or_404(Store, pk=owner.id)
+    reservation_list = shop_name.reservation_set.all()
+    return render(request, 'list.html', {'reservation_list': reservation_list, 'shop_name': shop_name, 'owner': owner})
 
 def Reser_custom(request,pk):
     customer = get_object_or_404(User, pk=pk)

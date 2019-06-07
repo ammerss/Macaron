@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User, AbstractUser
 from store.models import Store
+from django.contrib import auth
+from accounts.models import Profile
 
 class Reservation(models.Model):
     reser_num = models.CharField(primary_key=True,max_length=20, default='')
