@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from reservation.models import Reservation
 from store.models import Store, Macarons
+from accounts.models import Profile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -54,7 +55,8 @@ def request_reservation(request, pk):
     return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
 def Reser_owner(request,pk):
-    store = get_object_or_404(Store, pk=pk)
+    profile = get_object_or_404(Profile, pk=pk)
+    store = Store.objects.all().filter(owner=profile.user)
     shop_name = store
     reservation_list = shop_name.reservation_set.all()
     return render(request, 'list.html', {'reservation_list': reservation_list, 'shop_name': shop_name})
