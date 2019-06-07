@@ -460,6 +460,7 @@
 		input[type="text"],
 		input[type="email"],
 		input[type="password"],
+		input[type="tel"],
 		select,
 		textarea {
 			@include vendor('transition', 'background-color 0.25s ease-in-out');
@@ -971,6 +972,7 @@
 			input[type="text"],
 			input[type="email"],
 			input[type="password"],
+			input[type="tel"],
 			select,
 			textarea {
 				background: #f7f7f7;
