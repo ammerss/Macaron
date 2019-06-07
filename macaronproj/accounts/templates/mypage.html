@@ -40,11 +40,11 @@
 			</div>
 			{% else %}
 			<div class="myinfo"> Hello! {{profile.user.username}} customer</div>
-				<div class="my_link">
+				<div class="my_link" style="text-align: center">
 				<p></p>
-				<div><a href="">check reservation</a></div> <!--예약확인 링크-->
-				<div><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
-				<div><a href="">review list</a></div> <!--리뷰리스트 링크-->
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; margin-right: 19%; position: relative; line-height: 160px"><a href="">check reservation</a></div> <!--예약확인 링크-->
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="">review list</a></div> <!--리뷰리스트 링크-->
 			</div>
 			{% endif %}
 				</section>

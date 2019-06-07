@@ -19,7 +19,30 @@
 		<div id="page-wrapper">
 
 			{% block content %}
-
+			<style>
+					div.radio-wrap {
+					display: inline-flex;
+					align-items: center;
+					}
+			
+					input[type='radio'],
+					input[type='radio']:checked {
+					appearance: none;
+					width: 0.9rem;
+					height: 0.9rem;
+					border-radius: 100%;
+					margin-right: 0.1rem;
+					}
+			
+					input[type='radio'] {
+					background-color: #e8e8e8;
+					}
+					input[type='radio']:checked {
+					background-color: #ed786a;
+					}
+					
+					</style>
+					
 			<!-- Features -->
 				<section id="features">
 					<h2 class="inTitle">Edit</h2> 
@@ -61,12 +84,20 @@
                 </tr>
             </tbody>
         </table>
-        {% if profile.user_type %}
-            <input type="radio" name="type" value="owner" checked> Owner<br>
-            <input type="radio" name="type" value="customer" > Customer<br>
+		{% if profile.user_type %}
+			<div class="radio-wrap">
+				<input type="radio" name="type" value="customer"> Customer
+			</div>
+			<div class="radio-wrap">
+				<input type="radio" name="type" value="owner" checked> Owner
+			</div>
         {% else %}
-            <input type="radio" name="type" value="owner"> Owner<br>
-            <input type="radio" name="type" value="Customer" checked> Customer<br>
+		<div class="radio-wrap">
+				<input type="radio" name="type" value="customer" checked> Customer
+			</div>
+			<div class="radio-wrap">
+				<input type="radio" name="type" value="owner"> Owner
+			</div> 
 	    {% endif %}        
 
     </div>
