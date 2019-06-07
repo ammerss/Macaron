@@ -55,11 +55,10 @@ def request_reservation(request, pk):
     return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
 def Reser_owner(request,pk):
-    profile = get_object_or_404(Profile, pk=pk)
-    store = Store.objects.all().filter(owner=profile.user)
-    shop_name = store
-    reservation_list = shop_name.reservation_set.all()
-    return render(request, 'list.html', {'reservation_list': reservation_list, 'shop_name': shop_name})
+    owner = get_object_or_404(User, pk=pk)
+    shop_name = Store.objects.all().filter(owner=owner)
+    reservation_list = Reservation.objects.all().filter(shop_name=shop_name[0])
+    return render(request, 'list.html', {'reservation_list': reservation_list, 'shop_name': shop_name, 'owner': owner})
 
 def Reser_custom(request,pk):
     customer = get_object_or_404(User, pk=pk)
