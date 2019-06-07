@@ -55,15 +55,15 @@ def new(request):
 
 def create_store(request):
     if request.method == 'POST':
-            form = ImageForm(request.POST, request.FILES)
+            form = ImageForm(request.POST,request.FILES)
             if form.is_valid():
                     info = form.save(commit=False)
                     info.name = request.POST.get('name', '')
                     info.num = request.POST.get('number', '')
                     info.content = request.POST.get('body', '')
-    info.owner = request.user
-    info.save()
-    return redirect ('/store')
+                    info.owner = request.user
+                    info.save()
+                    return redirect ('/store')
    
 
 def mystores(request, user_id):
