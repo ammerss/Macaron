@@ -67,7 +67,11 @@
                 {% else %}
                 <form action="{% url 'reservation:request_approve' reservation.reser_num%}" method = "POST">
                 {% csrf_token %}
-                <input type="submit" value="approve" style="height:30px; width:140px;">
+                <input type="submit" value="approve">
+                or
+                <form action="{% url 'reservation:request_reject' reservation.reser_num%}" method = "POST">
+                {% csrf_token %}
+                <input type="submit" value="reject">
                 {% endif %}
                 </th>
             </tr></thead>

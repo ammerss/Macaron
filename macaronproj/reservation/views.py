@@ -69,10 +69,9 @@ def request_reservation(request, pk):
     return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
 def Reser_owner(request,pk):
-    owner = get_object_or_404(User, pk=pk)
-    shop_name = Store.objects.all().filter(owner=owner)
-    reservation_list = Reservation.objects.all().filter(shop_name=shop_name[0])
-    return render(request, 'list.html', {'reservation_list': reservation_list, 'shop_name': shop_name, 'owner': owner})
+    store = get_object_or_404(Store, pk=pk)
+    reservation_list = store.reservation_set.all()   
+    return render(request, 'list.html', {'reservation_list': reservation_list, 'store': store})
 
 def Reser_custom(request,pk):
     customer = get_object_or_404(User, pk=pk)
@@ -87,6 +86,19 @@ def request_approve(request, pk):
         pk=reservation.shop_name.id
         return HttpResponseRedirect(reverse('reservation:Reser_owner', args=(pk,)))
     return HttpResponseRedirect(reverse('reservation:Reser_owner', args=(pk,)))    
-        
+
+def request_reject(request, pk):
+    reservation = get_object_or_404(Reservation, pk=pk)
+    shop_name = reservation.shop_name
+    macaron_list = shop_name.macarons_set.all()
+    if request.method == 'POST':
+        for macaron in macaron_list:
+            if macaron.name == reservation.choice_macaron:
+                macaron.stock += reservation.quantity
+                macaron.save()
+                break
+        pk=reservation.shop_name.id
+        return HttpResponseRedirect(reverse('reservation:Reser_owner', args=(pk,)))
+    return HttpResponseRedirect(reverse('reservation:Reser_owner', args=(pk,)))         
 
  
