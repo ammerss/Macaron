@@ -1,20 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
 {% if error %}
     {{ error }}
     <br><br>
 {% endif %}
+{% block content %}
 
-<h1>Login</h1>
+<body class="homepage is-preload">
+		<div id="page-wrapper">
 
-<form method="POST">
-    {% csrf_token %}
-    Username:
-    <br>
-    <input name="username" type="text" value="">
-    <br>
-    Password:
-    <br>
-    <input name="password" type="password" value="">
-    <br>
-    <br>
-    <input class="btn btn-primary" type="submit" value="Login">
-</form>
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+						<div class="row">
+							<div class="col-6">
+								<section>
+									<h1 style="font-size: 70px">
+										SIGN IN
+									</h1><br><br>
+									<form method="POST">
+										{% csrf_token %}
+										Username : <input type = "text" name = "username"><br>
+										Password : <input type = "password" name = "password"><br>
+										<input type = "submit" value = "Sign In!">
+									</form>
+								</section>
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>            
+	</body>
+{% endblock %}
