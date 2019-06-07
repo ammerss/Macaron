@@ -5,6 +5,47 @@
 <html>
 
 {% block content %}
+<style>
+
+    form input[type="date"],
+    form input[type="time"]{
+			-moz-transition: background-color 0.25s ease-in-out;
+			-webkit-transition: background-color 0.25s ease-in-out;
+			-ms-transition: background-color 0.25s ease-in-out;
+			transition: background-color 0.25s ease-in-out;
+			-webkit-appearance: none;
+			display: block;
+			border: 0;
+			background: #e8e8e8;
+			width: 50%;
+			box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			line-height: 1.25em;
+			padding: 0.75em 1em 0.75em 1em;
+	}
+
+    div.radio-wrap {
+    display: inline-flex;
+    align-items: center;
+    }
+
+    input[type='radio'],
+    input[type='radio']:checked {
+    appearance: none;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 100%;
+    margin-right: 0.1rem;
+    }
+
+    input[type='radio'] {
+    background-color: #e8e8e8;
+    }
+    input[type='radio']:checked {
+    background-color: #ed786a;
+    }
+    
+</style>
 
 <section id="header">
         <div>
@@ -19,7 +60,7 @@
                 <h2>Shop Name: {{store.name}}</h2>
                 <strong>Shop information </strong>
                 <hr>
-                {{store.content}}
+                <div>{{store.content}}</div>
             </p>
         </div>
     </section>
@@ -41,12 +82,22 @@
                     {% for macaron in product_list %}
                     {%if macaron.picture %}
                     <p>
-                     <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
+                     <img src="{{macaron.picture.url}}" height=300 alt="no image"> 
                         {{macaron.pic_content}}
                     {% else %}
                         <h5>no image</h5>
                      {% endif%}
-                            <h3><input type="checkbox" name="choice" value={{macaron.name}}>Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="quantity" min="0" max="30" step="1"></h3>
+                            <h3><div class="radio-wrap">
+                                <input type="radio" name="choice" value={{macaron.name}}>
+                            </div>
+                            Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}}
+                            &nbsp; &nbsp; &nbsp; &nbsp; Count: <input type="number" name="quantity" min="0" max="30" step="1" value=0 style="			border: 0;
+                            background: #e8e8e8;
+                            width: 15%;
+                            box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+                            border-radius: 4px;
+                            
+                            padding: 0.75em 1em 0.75em 1em;"></h3>
                         </p>
                     {% endfor %}
                     {% else %}
@@ -58,13 +109,14 @@
                     <h2>Choose Date & Time to Pick Up!</h2>
                    
                     <label>
-                           <p> Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time"></p>
+                           <p> Pickup Date: <input type="date" name="date" value="2019-06-10"></p>
+                            <p>Time: <input type="time" name="time" value="12:00"></p>
                     </label>
 
                     </div>
-                    <div>
+                    <div class="btn_center">
                         <p>
-                        <input type="submit" value="Reserve!">
+                        <input class="btn_s" type="submit" value="Reserve!">
                         </p>
                     </div>
                     {% if messages %}
