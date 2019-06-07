@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.views import generic
 from store.models import Store, Macarons
 from .forms import PhotoForm
-
+from accounts.models import Profile
 # Create your views here.
 def home(request):
     store_list=Store.objects.all()
@@ -60,6 +60,12 @@ def create_store(request):
     store.save()
 
     return redirect ('/store')
+
+def mystores(request, user_id):
+    if request.method == 'GET':
+        profile = get_object_or_404(Profile, pk=user_id)
+        stores = Store.objects.all().filter(owner=profile.user)
+    return render(request, 'mystores.html', {'profile':profile, 'store_list' : stores})
 
 # def upload_pic(request,pk):
 #     #content = get_object_or_404(Macarons, pk=pk)
