@@ -56,6 +56,9 @@ def request_reservation(request, pk):
         for macaron in macaron_list:
             if macaron.name == macaron_name:
                 price = macaron.price
+                macaron.stock -= quantity
+                macaron.save()
+                break
         reservation.amount = int(quantity*price)
         reservation.choice_macaron = macaron_name
         reservation.reser_request_time = reser_request_time
