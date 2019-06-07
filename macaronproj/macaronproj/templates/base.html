@@ -24,14 +24,14 @@
 										{% if user.is_authenticated %}
 											Welcome {{user.profile.name}}
 
-											<form action = "{% url 'logout' %}" method="POST">
+											<form action = "{% url 'accounts:logout' %}" method="POST">
 												{% csrf_token %}
 												<input type="submit" value="로그아웃">
 											</form>
-                                            <li><a class="icon fa-cog" href="{% url 'mypage' user.id %}"><span>My Page</span></a></li>
+                                            <li><a class="icon fa-cog" href="{% url 'accounts:mypage' user.id %}"><span>My Page</span></a></li>
 										{% else %}
-											<li><a class="icon fa-home" href="{% url 'signup' %}"><span>Sign Up</span></a></li>
-											<li><a href="{% url 'login' %}" class="icon fa-bar-chart-o"><span>Sign In</span></a></li>
+											<li><a class="icon fa-home" href="{% url 'accounts:signup' %}"><span>Sign Up</span></a></li>
+											<li><a href="{% url 'accounts:login' %}" class="icon fa-bar-chart-o"><span>Sign In</span></a></li>
                                             <li><a class="icon fa-sitemap" href="#"><span>Please sign in before using website!</span></a></li>
 										{% endif %}
 

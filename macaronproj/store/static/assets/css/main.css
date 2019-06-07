@@ -1661,6 +1661,7 @@ input, select, textarea {
 		margin: 0 0 1em 0;
 	}
 
+	form input[type="username"],
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
