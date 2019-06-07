@@ -65,7 +65,10 @@ def editmypage(request, pk):
                 user.profile.name = request.POST['name']
                 user.profile.phone = request.POST['phone']
                 user.save()
-                return redirect('/')
+                auth.login(request,user)
+
+                profile = get_object_or_404(Profile, pk=pk)
+                return render(request, 'editmypage.html', {'profile':profile})
             else:
                 messages.success(request, 'Please re-confirm your password.')
                 return HttpResponseRedirect(reverse('accounts:editmypage', args=(pk,)))
