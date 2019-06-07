@@ -15,38 +15,49 @@ def reserve(request, pk):
     product_list = store.macarons_set.all()
     return render(request, 'show.html', {'product_list': product_list, 'store': store})
 
+count = 0
+
 @login_required
 def request_reservation(request, pk):
-    count = 1
+    global count
     customer = request.user
     shop_name = get_object_or_404(Store, pk=pk)
-    quantity = request.POST.get('quantity')
-    if(quantity == 0):
+
+    quantity = int(request.POST.get('quantity'))
+    if quantity == 0:
         messages.error(request, 'ERROR: Please fill the form of COUNT')
         return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
-    macaron = request.POST.get('choice')
-    if( not macaron):
+
+    macaron_name = request.POST.get('choice')
+    if not macaron_name:
         messages.error(request, 'ERROR: Please choice MACARON TYPE!')
         return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
+    
+
     reser_request_time = timezone.datetime.now()
     #convert date value and time value to Datetime form
     if(request.POST.get('date')=='' or request.POST.get('time')==''):
         messages.error(request, 'ERROR: Please fill the form of DATE and TIME')
         return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
+
     date = datetime.datetime.strptime(request.POST.get('date'), "%Y-%m-%d").date()
     time = datetime.datetime.strptime(request.POST.get('time'), "%H:%M").time()
     reser_time = datetime.datetime.combine(date, time)
 
-
     if request.method == 'POST':
         reservation = Reservation()
-        reservation.reser_num = reser_request_time.strftime('%Y%m%d') + str(shop_name.id).zfill(4) + str(count).zfill(3)
         count += 1
-        if(count>999): count = 0
+        if(count>999): count = 1
+        reservation.reser_num = reser_request_time.strftime('%Y%m%d') + str(shop_name.id).zfill(4) + str(count).zfill(3)
         reservation.customer = customer
         reservation.shop_name = shop_name
         reservation.quantity = quantity
-        reservation.choice_macaron = macaron
+        macaron_list = shop_name.macarons_set.all()
+        for macaron in macaron_list:
+            if macaron.name == macaron_name:
+                price = macaron.price
+        reservation.amount = int(quantity*price)
+        reservation.choice_macaron = macaron_name
         reservation.reser_request_time = reser_request_time
         reservation.reser_time = reser_time
         reservation.save()
