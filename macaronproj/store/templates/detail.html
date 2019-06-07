@@ -1,38 +1,73 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+
   <title>Document</title>
 </head>
-<body>
-  <h1>마카롱 가게 선택하면 나오는 가게 페이지 입니다.</h1>
+<div id="page-wrapper">
+    {%block logoname %}{{ store.name }}{%endblock%}
+    {% block logo_script %}
+    <p> {{ store.num }}</p>
+    <p>{{store.content}}</p>
+    {% endblock %}
+{% block content %}
 
-  <p><strong>Name :</strong>{{ store.name }}</a></p> 
-  <p><strong>num :</strong> {{ store.num }}</p>
-  <p><strong>Info :</strong> {{store.content}}</p> 
-  <br><br>
-  {% for macaron in product_list %}
-  <p>{{macaron.name}}
-     {{macaron.price}}
-     {{macaron.stock}}
-     {%if macaron.picture %}
-     <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
-     {{macaron.pic_content}}
-     {% else %}
-     <h5>사진이 없습니다.</h5>
-     {% endif%}
-     <input type="text" name="num_mac"> 
-     <button type="submit"> 예약 </button>
-  </p>
-  {% endfor %}
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    
+    <div class="row">
+      
+    <div class="row aln-center">
+        {% for macaron in product_list %}
+      <div class="col-4 col-6-medium col-12-small">
 
-  {% if user == store.owner %}
-    <a href="{% url 'store:edit' store.id%}">상품 업로드하기</a>
-  {% endif %}
-
-</body>
+        <!-- Feature -->
+        
+          <section>
+            <img src="{{macaron.picture.url}}" class="image featured" height=200 alt="macaron pic" />
+            
+            <header>
+              <h3>{{macaron.name}}</h3>
+            </header>
+            <p>{{macaron.price}} won </p>
+            {{macaron.pic_content}}
+            <p>left : <strong>{{macaron.stock}}</strong></p>
+            <div class="col-4">
+              <input type="text" name="num_mac" placeholder="enter number"> 
+              <button type="submit" class="button icon "> Get </button>
+             </div>
+            
+          </section>
+         
+      </div>
+         {% endfor %}
+         {%if not product_list %}
+         <p>There are no macarons yet!</p>
+         {% endif %}
+      
+      
+      <div class="col-12">
+          {% if user == store.owner %}
+        <ul class="actions">
+          <li><a href="{% url 'store:edit' store.id%}" class="button icon fa-file">Add Macarons</a></li>
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+</div>
 </html>
 
 
