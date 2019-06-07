@@ -23,28 +23,25 @@
 			<!-- Features -->
 				<section id="features">
 					<h2 class="inTitle">MyPage</h2>
+					Hello! {{profile.user.username}} 님<br>
+					name :{{profile.name}}<br>
+					phonenumber : {{profile.phone}}<br>
+					email : {{profile.email}}<br>
+
 			{% if profile.user_type %}
-			<div class="myinfo"> Hello! {{profile.user.username}} owner</div>
+				<div class="myinfo"> type: owner</div>
 				<div class="my_link">
 				<p></p>
-				<div class="inner_line">
-					<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; left: -50%; line-height: 160px"><a href="">change store information</a></div> <!--가게정보변경-->
-					<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px;float:left; position: relative; left: 50%; line-height: 160px"><a href="">check reservation</a></div> <!--예약확인 링크-->
-				</div>
-				<div style="clear:both;"></div>
-				<div>
-					<div style="border:1px solid; width: 20%; height: 180px; line-height: 160px; padding:10px; margin:10px; float:right; position: relative; left: -50%;"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
-					<div style="border:1px solid; width: 20%; height: 180px; line-height: 160px; padding:10px; margin:10px;float:left; position: relative; left: 50%; "><a href="">review list</a></div> <!--리뷰리스트 링크-->
-				</div>
-				
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; margin-right: 19%; position: relative; line-height: 160px"><a href="">change store information</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/reservation/Reser_owner/{{profile.user.id}}}">check reservation</a></div> <!--리뷰리스트 링크-->				
 			</div>
 			{% else %}
-			<div class="myinfo"> Hello! {{profile.user.username}} customer</div>
-				<div class="my_link">
+			<div class="myinfo"> type: customer</div>
+				<div class="my_link" style="text-align: center">
 				<p></p>
-				<div><a href="">check reservation</a></div> <!--예약확인 링크-->
-				<div><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
-				<div><a href="">review list</a></div> <!--리뷰리스트 링크-->
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; left: -50%; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px;float:left; position: relative; left: 50%; line-height: 160px"><a href="/reservation/Reser_custom/{{profile.user.id}}">check reservation</a></div> <!--예약확인 링크-->
 			</div>
 			{% endif %}
 				</section>
