@@ -11,6 +11,7 @@ urlpatterns = [
    path('detail/<int:pk>/edit/', store.views.edit, name='edit'),
    path('new/', store.views.new, name='new'),
    path('create/', store.views.create_store, name='create_store'),
+   path('mystores/<int:user_id>/editmystore/<int:store_id>/', store.views.editmystore,name='editmystore'),
    path('mystores/<int:user_id>/', store.views.mystores, name='mystores'),
    # path('upload_pic/<int:pk>', store.views.upload_pic, name='upload_pic'),
 ]

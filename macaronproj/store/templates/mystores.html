@@ -24,7 +24,9 @@
 					<h2 class="inTitle">Which store do you want to edit?</h2>
                         {% if store_list %} 
                             {% for store in store_list %}
-							<p><a href= "{{ store.get_absolute_url }}">{{ store.name }}</a></p> 
+                            <p><a href= "{{ store.get_absolute_url }}">{{ store.name }}</a></p> 
+                            <form method = "post" action="editmystore/{{store.id}}/">
+                                    {% csrf_token %}
 							<div class="my_infobox" style="padding-left: 20%; padding-right: 20%">
 									<table width="100" cellpadding="3%" cellspacing="0" summary="가게 수정">
 										<colgroup>
@@ -32,24 +34,23 @@
 										<tbody>
 																	
 												<tr>
-													<th scope="row">Store name</th>
-													<td><input type="text" name="passwd" title="이름을 입력하세요" class="t_input" value = {{store.name}}></td>
+                                                    <th scope="row">Store name</th>
+                                                    <div class= a name="StoreName" value= {{store.name}}></div>
+													<td><input type="text" name="storename" title="이름을 입력하세요" class="t_input" value = {{store.name}}></td>
 													<th scope="row">Phone num</th>
-													<td><input type="text" name="repasswd" title="번호를 입력하세요" class="t_input" value = {{store.num}}></td>
+													<td><input type="text" name="storenumber" title="번호를 입력하세요" class="t_input" value = {{store.num}}></td>
 												</tr>
 												<tr>
 												<th scope="row">Store details</th>
-												<td colspan="6"><input type="text" name="name" title="내용 입력하세요" class="t_input" value= {{store.content}}> <span></span></td>
+												<td colspan="6"><input type="text" name="storecontent" title="내용 입력하세요" class="t_input" value= {{store.content}}> <span></span></td>
 											</tr>
-											
-											
-											
 										</tbody>
-									</table>
-									<div class="btn_center">
-											<input class="btn_s" type="submit" value="Submit"></div>
+                                    </table>
+									<button id="sub_btn" type="submit" value="Submit">Submit</button>
+                                </form>
 							<br><br>
-								</div>
+                                </div>
+                               
                             {% endfor %}
                         {% endif %}
                             
