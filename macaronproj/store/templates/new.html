@@ -10,6 +10,7 @@
     <h1>새 가게 등록하는 페이지 입니다.</h1>
     <form method="post" action="{% url 'store:create_store' %}">
     {% csrf_token %}
+    {{form.as_p}}
     이름 : <input type="text" name="name"><br>
     전화번호(-없이 작성) : <input type="text" name="number"><br>
     <textarea cols="30" row="10" name="body">소개글을 입력하세요.</textarea><br>
