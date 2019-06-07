@@ -1,56 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        body { margin:0; padding:0; height:100%;}
-        .header { width:100%; height:40%;}
-        .body {width:100%; height:70%; float:left;}
-    </style>
-</head>
-<body>
-    <header class="header">
-        <h2>Shop Information</h2>
+{% extends 'base.html' %}
 
-        <img src="https://us.123rf.com/450wm/mariaaverburg/mariaaverburg1702/mariaaverburg170200213/72311757-%EB%A7%88%EC%B9%B4%EB%A1%B1%EC%9D%84-%EB%84%A3%EC%9D%80-%EC%83%9D%EC%9D%BC-%EC%B9%B4%EB%93%9C.jpg?ver=6"
-            alt="No Image" style="height:100%; width:20%; float:left;">
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
 
-        <div style="height:100%; width:80%; float:left;">
-            <h3>Shop Name: {{store.name}}</h3><br>
-            <p>Shop information</p>
-            <p>{{store.content}}</p>
+{% block content %}
+
+<section id="header">
+        <div>
+            <header><h2>Shop Information</h2></header>
+            <!----
+            <a href="#" class="image left">
+                <img src="https://us.123rf.com/450wm/mariaaverburg/mariaaverburg1702/mariaaverburg170200213/72311757-%EB%A7%88%EC%B9%B4%EB%A1%B1%EC%9D%84-%EB%84%A3%EC%9D%80-%EC%83%9D%EC%9D%BC-%EC%B9%B4%EB%93%9C.jpg?ver=6"
+                    alt="No Image" style="height:200px; width:200px;">
+            </a>-->
+    
+            <p class="row.aln-middle">
+                <h2>Shop Name: {{store.name}}</h2>
+                <strong>Shop information </strong>
+                <hr>
+                {{store.content}}
+            </p>
         </div>
+    </section>
+<hr>
 
-    </header>
-    <hr>
+<section id="main">
+   <div class="container">
+       <article class="box post">
+           <header>
+               <h2>Reserve Macaron!</h2>
+            </header>
 
-    <div class="body">
-        <form action="{% url 'reservation:request_reservation' store.id%}"
-              method = "POST">
-              {% csrf_token %}
-              <fieldset>
-                  <legend><h3>Reserve Macarons</h3></legend>
-                    <h3>[ Macarons ]</h3>
-                {% if product_list %}
-                {% for macaron in product_list %}
+            <form action="{% url 'reservation:request_reservation' store.id%}" method="POST">
+                {% csrf_token %}
+
+                <div class="container">
+                    <h2>Choose Type of Macaron!</h2>
+                    {%if product_list%}
+                    {% for macaron in product_list %}
+                    {%if macaron.picture %}
                     <p>
-                      Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="quantity" min="0" max="30" step="1">
-                    </p>
-                {% endfor %}
-                {% else %}
-                    <p>No macaron available for reservation!TT</p>
-                {% endif %}
-                    <br><br>
-                    <h3>[ Information for Reservation ]</h3>
+                     <img src="{{macaron.picture.url}}" height=300 alt="마카롱"> 
+                        {{macaron.pic_content}}
+                    {% else %}
+                        <h5>no image</h5>
+                     {% endif%}
+                            <h3><input type="checkbox" name="choice" value={{macaron.name}}>Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}} &nbsp; &nbsp; &nbsp; &nbsp;  Count: <input type="number" name="quantity" min="0" max="30" step="1"></h3>
+                        </p>
+                    {% endfor %}
+                    {% else %}
+                        <p>No macaron for reservation! TT</p>
+                    {% endif%}
+
+                    <br><hr>
+                    
+                    <h2>Choose Date & Time to Pick Up!</h2>
+                   
                     <label>
-                        Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time">
+                           <p> Pickup Date: <input type="date" name="date"> &nbsp; &nbsp; &nbsp; &nbsp; Time: <input type="time" name="time"></p>
                     </label>
-                </fieldset>
-            <input type="submit" value="Reserve!" style="height:50px; width:100px;">
-        </form>
-    </div>
-</body>
+
+                    </div>
+                    <div>
+                        <p>
+                        <input type="submit" value="Reserve!">
+                        </p>
+                    </div>
+                    {% if messages %}
+                    <ul class="messages">
+                         {% for message in messages %}
+                         <script>
+                                alert('{{message}}')
+                        </script>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            </form>
+        </article>
+   </div>
+</section>
+{% endblock %}
+
 </html>
