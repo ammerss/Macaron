@@ -2,7 +2,18 @@
 
 {% load staticfiles %}
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
+                <head>
+                  
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+                
+                  <title>Document</title>
+                </head>
+                <div id="page-wrapper">
 
     {% block content %}
 
@@ -14,7 +25,6 @@
                 <div class="row aln-center">
                 <div class="col-12">
     
-    
         <header>
             <h3>check whether you approve reservation!
             </h3>
@@ -22,13 +32,6 @@
         <p>Without shop owner's approval, reservation is not done.
             so check approval of reservation.</p>
 
-        </div>
-    <input id="mode" name="mode" value="" type="hidden">
-    <input id="term" name="term" value="" type="hidden">
-    </form>
-   
-    <div class="container">
-        <div class="row aln-center">
     <table border="1" summary="">
         <colgroup>
             <col style="width:100px;">
@@ -39,7 +42,7 @@
             <col style="width:135px;">
             <col style="width:145px;">
         </colgroup>
-            
+        {% if reservation_list %}        
     <thead><tr>
     <th scope="col"> number </th>
     <th scope="col"> customer name </th>
@@ -50,7 +53,6 @@
     <th scope="col"> approval </th>
     </tr></thead>
     <tbody class="center ">
-    {% if reservation_list %}
         {% for reservation in reservation_list%}
         <thead><tr>
             <th scope="col">{{reservation.reser_num}}</th>
@@ -72,11 +74,15 @@
         {% endfor %}
     {% else %}
     <p class="message displaynone">There is no reservation.</p>
-    {% endif %}  
-    </tbody>
-    </table>
-    </div>
-    </div>
-    {% endblock %}
+    {% endif %}     
+            </tbody>
+        </table>
+        </div> 
+        </div> 
+</div>
 
-</html>    
+</div>
+{% endblock %}
+</body>
+</html>  
+<br><br>
