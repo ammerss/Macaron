@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views import generic
 from store.models import Store, Macarons
-from .forms import PhotoForm
+from .forms import PhotoForm,ImageForm
 from accounts.models import Profile
 
 # Create your views here.
@@ -50,19 +50,21 @@ def edit(request,pk):
         return render(request,'edit.html',{'store':store,'form':form})   
 
 def new(request):
-    return render(request,'new.html')
+        form=ImageForm()
+        return render(request,'new.html',{'form':form})
 
 def create_store(request):
-    store=Store()
-    store.name=request.POST['name']
-    store.num=request.POST['number']
-    store.content=request.POST['body']
-    store.owner=request.user
-    store.save()
-
-    return redirect ('/store')
-
-    
+    if request.method == 'POST':
+            form = ImageForm(request.POST,request.FILES)
+            if form.is_valid():
+                    info = form.save(commit=False)
+                    info.name = request.POST.get('name', '')
+                    info.num = request.POST.get('number', '')
+                    info.content = request.POST.get('body', '')
+                    info.owner = request.user
+                    info.save()
+                    return redirect ('/store')
+   
 
 def mystores(request, user_id):
     if request.method == 'GET':
