@@ -1,31 +1,36 @@
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>New Store</title>
 </head>
-<body>
 
-<form action="{% url 'store:edit' store.id %}", method="post", enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>
-    이름 : <input type="text" name="title">
-    </p>
-    가격 : <input type="text" name="cost">
-    개수 : <input type="text" name="num">
-	{{form.as_p}}
-	<input type="submit" value="등록">
-</form>
-<br><br>
-{% for macaron in store.macarons_set.all %}
-    {{macaron.name}}
-    {{macaron.price}}
-    {{macaron.stock}}
-    {% comment %} <img src="{{ macaron.picture.url }}" height=300 alt="마카롱"> {% endcomment %}
-    {{macaron.pic_content}}
-{% endfor %}
-    
-</body>
-</html>
+{% block content %}
+<div>
+    <div id="page-wrapper">
+        <section id="features">
+			<div class="container">
+                 <h1 style="font-size:40px">MACARON REGISTRATION</h1>
+            </div>
+        </section>
+    </div>
+    <form style="margin:auto; width:60%; margin-top:5%;" method="post" enctype="multipart/form-data" action="{% url 'store:edit' store.id %}">
+     {% csrf_token %}
+     
+     <input type="text" name="title" placeholder="MACARON NAME"><br>
+     <input type="text" name="cost" placeholder="MACARON COST"><br>
+     <input type="text" name="num" placeholder="MACARON COUNT"><br>
+     {{form.as_p}}
+     
+        <div style="margin-left:80%;">
+	    	<ul class="actions">
+            <input type="submit", value="REGISTER">
+            </ul>
+	    </div>
+     </form>
+
+</div>  
+{% endblock %}
+</html> 
