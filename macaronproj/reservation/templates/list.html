@@ -32,6 +32,18 @@
         <p>Without shop owner's approval, reservation is not done.
             so check approval of reservation.</p>
 
+            {% if store_list %} 
+                            {% for store in store_list %}
+                            <br>
+							
+							<div><a href="{%  url 'reservation:Reser_owner' store.id%}">check reservation of {{ store.name }}</a></div>	
+                                
+							<br>
+                                </div>
+                            <br>
+                            {% endfor %}
+                        {% endif %} <br> <br>
+<!--
     <table border="1" summary="">
         <colgroup>
             <col style="width:100px;">
@@ -83,7 +95,7 @@
         </table>
         </div> 
         </div> 
-</div>
+</div>-->
 
 </div>
 {% endblock %}
