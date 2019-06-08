@@ -68,7 +68,13 @@ def request_reservation(request, pk):
         return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
     return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
-def Reser_owner(request,pk):
+def Reser_owner(request,s_id):
+    store = get_object_or_404(Store, pk=s_id)
+    #owner = get_object_or_404(Profile, pk=u_id)
+    reservation_list = store.reservation_set.all()
+    return render(request, 'reservations.html', { 'store' : store,'reservation_list': reservation_list})
+
+def Reser_list_owner(request,pk):
     profile = get_object_or_404(Profile, pk=pk)
     stores = Store.objects.all().filter(owner=profile.user)  
     return render(request, 'list.html', {'profile':profile, 'store_list' : stores})
