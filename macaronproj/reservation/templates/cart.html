@@ -64,10 +64,14 @@
                 <th scope="col">{{reservation.amount}}</th>
                 <th scope="col">{{reservation.reser_time}}</th>
                 <th scope="col"> 
-                        {% if reservation.approve %}
-                        O
+                        {% if reservation.approve == 0 %}
+                        wait for approval
                         {% else %}
-                        X 
+                            {% if reservation.approve == 1 %}
+                            O
+                            {% else %}
+                            X
+                            {%endif%}     
                         {%endif%}</th>
                 </tr></thead>
             {%endfor%}
