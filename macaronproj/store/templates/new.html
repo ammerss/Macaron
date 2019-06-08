@@ -21,15 +21,16 @@
      <form style="margin:auto; width:60%; margin-top:5%;" method="post" enctype="multipart/form-data" action="{% url 'store:create_store' %}">
      {% csrf_token %}
      {{form.as_p}}
-     <input type="text" name="name" placeholder="STORE NAME"><br>
-     <input type="text" name="number" placeholder="STORE NUMBER (XXX-XXXX-XXXX)"><br>
-     <textarea cols="30" row="10" name="body" placeholder="ENTER INTRODUCTION"></textarea><br>
+     <input required type="text" name="name" placeholder="STORE NAME"><br>
+     <input required type="text" name="number" placeholder="STORE NUMBER (XXX-XXXX-XXXX)"><br>
+     <textarea cols="30" row="10" name="body" placeholder="ENTER INTRODUCTION" required></textarea><br>
      
         <div style="margin-left:80%;">
 	    	<ul class="actions">
             <input type="submit", value="REGISTER">
             </ul>
 	    </div>
+      
      </form>
 
 </div>

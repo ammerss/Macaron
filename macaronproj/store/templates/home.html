@@ -16,23 +16,21 @@
 								<section>
 									<form method="get" action="">
 
-										<div class="row gtr-50 col-6 col-6-small aln-center margin-bottom-4">
-												<input name="search" placeholder="" type="text" style="float:left; position:relative;" >
-												<span><button type="submit" class="form-button-submit button icon fa-search  input_store" style="float:right; position:relative; ">Search</button>
+										<div position="center" class="row gtr-50 col-12 col-6-small aln-center margin-bottom-4" style="margin-left: auto">
+												<input name="search" placeholder="" type="text"  >
+												<span><button type="submit" class="form-button-submit button icon fa-search  input_store" style="">Search</button>
 											</i></span>
-										
-
 										</div>
 									</form>
 								</section>
 							</div>
 							<br><br>
-						<div class="row" postion="center">
-								<div class="row aln-center">
+						<div class="row aln-center" postion="center" >
+							<div class="row ">
 							{% if searched_stores %}
 							<p>search results for : {{ query }}</p>
 							  {% for store in searched_stores %}
-								<div class="col-4 col-6-medium col-12-small">
+								<div class="col-4 col-4-medium col-4-small row aln-center ">
 
 									<!-- Feature -->
 									
@@ -41,7 +39,7 @@
 											<a href="{{ store.get_absolute_url }}" class="image featured">
 													{% if store.store_pic %}
 													<div position="relative">
-														<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" ></div>
+														<img src="{{ store.store_pic.url }}" style="height: 250px; width: 100%; object-fit: cover;"  alt="storepic" ></div>
 													{% else %} 
 													<div position="relative">
 													<img src="{% static 'images/macarons.jpg' %}" >
@@ -60,7 +58,7 @@
 							{% else %}
 								{% if store_list %}
 							  {% for store in store_list %}
-							 <div  class="col-4 col-6-medium col-12-small">
+							 <div  class="col-4 col-12-medium col-12-medium row aln-center ">
 
 									<!-- Feature -->
 									
@@ -68,9 +66,9 @@
 											<a href="{{ store.get_absolute_url }}" class="image featured">
 												{% if store.store_pic %}
 												<div position="relative">
-													<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" ></div>
+													<img src="{{ store.store_pic.url }}" style="height: 30%; width: 100%; object-fit: cover;"  alt="storepic" ></div>
 												{% else %} 
-												<div position="relative">
+											</div>
 												<img src="{% static 'images/macarons.jpg' %}" >
 												</div>
 												{% endif %}
