@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Store(models.Model):
     objects=models.Manager()
-    name=models.CharField(max_length=20,blank=False)
-    num=models.CharField(max_length=20,blank=False)
-    content = models.TextField(blank=False)
+    name=models.CharField(max_length=20)
+    num=models.CharField(max_length=20)
+    content = models.TextField()
     store_pic = models.ImageField(blank=False, upload_to="images/%Y/%m/%d")
     owner=models.ForeignKey(User,editable=False,on_delete=models.CASCADE,default='1')
 
@@ -18,9 +18,9 @@ class Store(models.Model):
 
 
 class Macarons(models.Model):
-    name=models.CharField(max_length=50,blank=False)
-    price=models.PositiveIntegerField(blank=False)
-    stock=models.IntegerField(blank=False)
+    name=models.CharField(max_length=50)
+    price=models.IntegerField(default=0)
+    stock=models.IntegerField(default=0)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     picture = models.ImageField(blank=False, upload_to="pictures/%Y/%m/%d")
     pic_content=models.CharField(max_length=200)

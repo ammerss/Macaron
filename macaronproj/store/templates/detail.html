@@ -49,9 +49,14 @@
       </div>
 
          {% endfor %}
-         {%if not product_list %}
+        {%if not product_list %}
             <br><br><h5 class="inTitle">No macaron exists</h2>
-         {% endif %}
+        {% else %}
+        <div class="col-12" class="actions" style="float:left" >
+          <a href="{% url 'reservation:reserve' store.id %}" class="button">Make reservations</a>
+          <a href="{% url 'review:review' store.id %}" class="button">Reviews</a>
+        </div>
+        {% endif %}
       
       
         </div>
@@ -63,10 +68,7 @@
       </div>
 
       <div>
-      <div class="col-12" class="actions" style="float:left" >
-        <a href="{% url 'reservation:reserve' store.id %}" class="button">Make reservations</a>
-        <a href="{% url 'review:review' store.id %}" class="button">Reviews</a>
-      </div>
+      
 
     </div>
     

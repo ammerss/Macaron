@@ -5,6 +5,8 @@ from django.views import generic
 from store.models import Store, Macarons
 from .forms import PhotoForm,ImageForm
 from accounts.models import Profile
+from django.contrib import messages
+
 
 # Create your views here.
 def home(request):
@@ -42,9 +44,10 @@ def edit(request,pk):
            content.stock=stock
            content.store=store
         #    content = Macarons(id=None, name=name, price=price, stock=stock ,store=store)
+           
            content.save()
-       
            return HttpResponseRedirect(reverse('store:detail', kwargs={'pk': pk}))
+
     else:
         form=PhotoForm()
         return render(request,'edit.html',{'store':store,'form':form})   
@@ -62,6 +65,7 @@ def create_store(request):
                     info.num = request.POST.get('number', '')
                     info.content = request.POST.get('body', '')
                     info.owner = request.user
+                    
                     info.save()
                     return redirect('/store')
             
