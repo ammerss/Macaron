@@ -21,11 +21,12 @@
 			{% block content %}
 			<!-- Features -->
 				<section id="features">
-					<h2 class="inTitle">Which store do you want to edit?</h2>
+					<h2 class="inTitle">Store list</h2>
                         {% if store_list %} 
                             {% for store in store_list %}
                             <p><a href= "{{ store.get_absolute_url }}">{{ store.name }}</a></p> 
-                            <form method = "post" action="editmystore/{{store.id}}/">
+							<form method = "post" action="editmystore/{{store.id}}/">
+							<div><a href="{%  url 'reservation:Reser_owner' store.id%}">check reservation of {{ store.name }}</a></div>	
                                     {% csrf_token %}
 							<div class="my_infobox" style="padding-left: 20%; padding-right: 20%">
 									<table width="100" cellpadding="3%" cellspacing="0" summary="가게 수정">
