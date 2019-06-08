@@ -23,17 +23,16 @@
                 <div class="row aln-center">
                     <div class="col-12">
                         <br>
-                        <h4>check your reservation request!</h4>
+                        <h4>Store list</h4>
                         <br>
-                        <p>Without shop owner's approval, reservation is not done.
-                        Please check approval of reservation.</p>
+                        <p>Check your reservation of each store!</p>
                         {% if store_list %} 
                             {% for store in store_list %}
                                 <br>
 							    <div><a href="{%  url 'reservation:Reser_owner' store.id  %}">check reservation of {{ store.name }}</a></div>	
 							    <br>
                                 <br>
-                            {% endfor %}
+                            {% endfor %} 
                         {% endif %} 
                     </div>
                 </div>
