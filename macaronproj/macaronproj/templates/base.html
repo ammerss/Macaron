@@ -17,7 +17,7 @@
 				<section id="header" style="background-color: #ffe6cc; ">
 					<div class="container">
 						<!-- Logo -->
-							<h1 id="logo"><a href="{% url 'home' %}">{% block logoname %}Macaron Stores {%endblock%}</a></h1>
+							<h1 id="logo">{% block logoname %}Macaron Stores {%endblock%}</h1>
 							{% block logo_script %}
 							{% endblock %}
 							<!-- Nav -->
@@ -33,7 +33,7 @@
 									{% else %}
 										<li><a class="icon fa-home" href="{% url 'accounts:signup' %}"><span>Sign Up</span></a></li>
 										<li><a href="{% url 'accounts:login' %}" class="icon fa-bar-chart-o"><span>Sign In</span></a></li>
-										<li><a class="icon fa-sitemap" href="#"><span>Please sign in before using website!</span></a></li>
+										<li><a class="icon fa-sitemap" href="{% url 'home' %}"><span>Home</span></a></li>
 									{% endif %}
 								</ul>
 							</nav>
