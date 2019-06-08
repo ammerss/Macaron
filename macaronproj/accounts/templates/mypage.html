@@ -3,11 +3,6 @@
 {% load staticfiles %}
 
 <!DOCTYPE HTML>
-<!--
-	Strongly Typed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
@@ -16,26 +11,26 @@
 
 			<!-- Features -->
 				<section id="features">
-					<h2 class="inTitle">MyPage</h2>
-					Hello! {{profile.user.username}}~<br>
-					name :{{profile.name}}<br>
-					phonenumber : {{profile.phone}}<br>
-					email : {{profile.email}}<br>
+					<h2 class="inTitle">MyPage</h2><br>
+					Welcome! {{profile.user.username}}<br>
+					Name : {{profile.name}}<br>
+					Phone Number : {{profile.phone}}<br>
+					Email Address : {{profile.email}}<br>
 
 			{% if profile.user_type %}
-				<div class="myinfo"> type: owner</div>
+				<div class="myinfo"> Type: Owner</div>
 				<div class="my_link">
 				<p></p>
-				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; margin-right: 19%; position: relative; line-height: 160px"><a href="/store/mystores/{{profile.user.id}}">change store information</a></div>
-				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
-				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/reservation/Reser_list_owner/{{profile.user.id}}">check reservation</a></div> <!--리뷰리스트 링크-->				
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; margin-right: 19%; position: relative; line-height: 160px"><a href="/store/mystores/{{profile.user.id}}">Change Store Information</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">Change Personal Information</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; line-height: 160px"><a href="/reservation/Reser_list_owner/{{profile.user.id}}">Check Reservation</a></div> <!--리뷰리스트 링크-->				
 			</div>
 			{% else %}
-			<div class="myinfo"> type: customer</div>
+			<div class="myinfo"> Type: Customer</div>
 				<div class="my_link" style="text-align: center">
 				<p></p>
-				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; left: -50%; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">change info</a></div>
-				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px;float:left; position: relative; left: 50%; line-height: 160px"><a href="/reservation/Reser_custom/{{profile.user.id}}">check reservation</a></div> <!--예약확인 링크-->
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px; float:right; position: relative; left: -50%; line-height: 160px"><a href="/accounts/editmypage/{{profile.user.id}}">Change Information</a></div>
+				<div style="border:1px solid; width: 20%; height: 180px; padding:10px; margin:10px;float:left; position: relative; left: 50%; line-height: 160px"><a href="/reservation/Reser_custom/{{profile.user.id}}">Check Reservation</a></div> <!--예약확인 링크-->
 			</div>
 			{% endif %}
 				</section>

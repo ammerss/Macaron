@@ -14,17 +14,10 @@
   <title>Document</title>
 </head>
 <div id="page-wrapper">
-<<<<<<< HEAD
-    {%block logoname %}<a href="#">{{ store.name }}</a>{%endblock%}
-    {% block logo_script %}
-    <p> {{ store.num }}</p>
-    <p>{{store.content}}</p>
-=======
     {% block logoname %}{{ store.name }}{%endblock%}
     {% block logo_script %}<br>
     <p> {{ store.num }}<br>
     {{store.content}}</p>
->>>>>>> 98899a325eeb951893af8fe629c11029dbc3c71b
     {% endblock %}
 {% block content %}
 
@@ -57,7 +50,7 @@
 
          {% endfor %}
          {%if not product_list %}
-         <p>There are no macarons yet!</p>
+            <br><br><h5 class="inTitle">No macaron exists</h2>
          {% endif %}
       
       
@@ -65,17 +58,14 @@
       <div class="col-12">
           {% if user == store.owner %}
         <ul class="actions">
-          <a href="{% url 'store:edit' store.id%}" class="button icon fa-file">Add Macarons</a></ul>
+          <a href="{% url 'store:edit' store.id%}" class="button">Add Macarons</a></ul>
         {% endif %}
       </div>
 
       <div>
-      <div class="col-12" class="actions" style="float:left; " >
-        <a href="{% url 'reservation:reserve' store.id %}" class="button icon fa-file">Make reservations</a>
-      </div>
-
-      <div class="col-12" class="actions" style="float:right;margin-inline-start: 20px">
-        <a href="{% url 'review:review' store.id %}" class="button icon fa-file">Reviews</a>
+      <div class="col-12" class="actions" style="float:left" >
+        <a href="{% url 'reservation:reserve' store.id %}" class="button">Make reservations</a>
+        <a href="{% url 'review:review' store.id %}" class="button">Reviews</a>
       </div>
 
     </div>

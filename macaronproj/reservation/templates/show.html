@@ -49,18 +49,12 @@
 
 <section id="header">
         <div>
-            <header><h2>Shop Information</h2></header>
-            <!----
-            <a href="#" class="image left">
-                <img src="https://us.123rf.com/450wm/mariaaverburg/mariaaverburg1702/mariaaverburg170200213/72311757-%EB%A7%88%EC%B9%B4%EB%A1%B1%EC%9D%84-%EB%84%A3%EC%9D%80-%EC%83%9D%EC%9D%BC-%EC%B9%B4%EB%93%9C.jpg?ver=6"
-                    alt="No Image" style="height:200px; width:200px;">
-            </a>-->
-    
+            <br>
+            <h2>macaron reservation</h2><br>
+            <h3>Shop Information - {{store.name}}</h3>
             <p class="row.aln-middle">
-                <h2>Shop Name: {{store.name}}</h2>
-                <strong>Shop information </strong>
                 <hr>
-                <div>{{store.content}}</div>
+                <p>{{store.content}}</p>
             </p>
         </div>
     </section>
@@ -81,13 +75,13 @@
                     {%if product_list%}
                     {% for macaron in product_list %}
                     {%if macaron.picture %}
-                    <p>
+                    
                      <img src="{{macaron.picture.url}}" height=300 alt="no image"> 
-                        {{macaron.pic_content}}
+                        <h6>{{macaron.pic_content}}</h6>
                     {% else %}
                         <h5>no image</h5>
                      {% endif%}
-                            <h3><div class="radio-wrap">
+                            <h4><div class="radio-wrap">
                                 <input type="radio" name="choice" value={{macaron.name}}>
                             </div>
                             Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}}
@@ -97,7 +91,7 @@
                             box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
                             border-radius: 4px;
                             
-                            padding: 0.75em 1em 0.75em 1em;"></h3>
+                            padding: 0.75em 1em 0.75em 1em;"></h4>
                         </p>
                     {% endfor %}
                     {% else %}
