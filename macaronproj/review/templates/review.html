@@ -11,30 +11,28 @@
         </header>
     </section>
     <section id="feadtures">
-    <div class=contianer>
+    <div class=contianer style="padding-left: 10%; padding-right: 10%">
         <table>
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Writer</th>
-                    <th>Date</th>
-                    <th>Rate</th>
+                    <th style="text-align: center;">Title</th>
+                    <th style="text-align: center;">Writer</th>
+                    <th style="text-align: center;">Date</th>
                 </tr>
                 <tr>
                 </tr>
             </thead>
 
-            <tbody style="text-align:center;">
+            <tbody>
                 {% if review_text.all %}
                     {% for text in review_text.all %}
-                <tr>
-                    <td width="400px">{{text.title}}</a></td>
-                    <td width="100px">{{text.writer}}</td>
-                    <td width="200px">{{text.post_date}}</td>
-                    <td>{{text.rate}}</td>
+                <tr style=" text-align:center; background: white">
+                    <td width="60%" ><strong>{{text.title}}</strong></td>
+                    <td width="10%">{{text.writer}}</td>
+                    <td width="30%">{{text.post_date}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">{{text.content}}</td>
+                    <td colspan="3" style="padding-left: 10%; padding-right: 10%">{{text.content}}</td>
                 </tr>
                   {% endfor %}
                 {% else %}
@@ -50,9 +48,14 @@
         <form action = "{% url 'review:post_review' store.id %}" method = "POST">
             {% csrf_token %}
             <div class="container">
-                <textarea name = "head"  placeholder="Write title"></textarea>
+                <input type="text" name = "head"  placeholder="Write title" ></textarea>
                 <textarea name = "body"  placeholder="Write content"></textarea>
-                <input type = "submit", value = "Post">
+            </div>
+            <br>
+            <div class="btn_center" style="padding-left: 90%; padding-right: 10%">
+                    <p>
+                    <input class="btn_s" type="submit" value="POST">
+                    </p>
             </div>
 
             {% if messages %}
