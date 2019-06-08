@@ -25,7 +25,8 @@ def signup(request):
             auth.login(request,user_data)
             return redirect('/')
         else:
-            return render(request, 'signup.html')
+            fail = True
+            return render(request, 'signup.html',{'fail':fail})
     else:   
         return render(request, 'signup.html')
 
@@ -38,12 +39,13 @@ def login(request):
             auth.login(request, user)
             return redirect('home')
         else:
-            return render(request, 'login.html', {'error': 'username or password is incorrect.'})
+            fail = True
+            return render(request, 'login.html', {'fail':fail})
     else:
         return render(request, 'login.html')
 
 def logout(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         auth.logout(request)
         return redirect('home')
     return render(request, 'login.html')

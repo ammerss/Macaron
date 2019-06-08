@@ -3,18 +3,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE HTML>
-<!--
-	Strongly Typed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-	<head>
-		<title>Strongly Typed by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
-	</head>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
@@ -23,31 +12,25 @@
 			<!-- Features -->
 				<section id="features">
 					<div class="container">
-						<div class="col-6 col-12-medium">
+						<div class=" col-12 col-12-medium">
 								<section>
 									<form method="get" action="">
-										<div class="row gtr-50">
-											
-											<div class="col-12 col-12-small">
-												<input name="search" placeholder="search for store" type="text" />
-											</div>	
-											
-											<div class="col-12">
-												<button type="submit" class="form-button-submit button icon  input_store">Search</button>
-											</div>
-										
 
+										<div position="center" class="row gtr-50 col-12 col-6-small aln-center margin-bottom-4" style="margin-left: auto">
+												<input name="search" placeholder="" type="text"  >
+												<span><button type="submit" class="form-button-submit button icon fa-search  input_store" style="">Search</button>
+											</i></span>
 										</div>
 									</form>
 								</section>
 							</div>
 							<br><br>
-						<div class="row" postion="center">
-								<div class="row aln-center">
+						<div class="row aln-center" postion="center" >
+							<div class="row ">
 							{% if searched_stores %}
 							<p>search results for : {{ query }}</p>
 							  {% for store in searched_stores %}
-								<div class="col-4 col-6-medium col-12-small">
+								<div class="col-4 col-4-medium col-4-small row aln-center ">
 
 									<!-- Feature -->
 									
@@ -56,7 +39,7 @@
 											<a href="{{ store.get_absolute_url }}" class="image featured">
 													{% if store.store_pic %}
 													<div position="relative">
-														<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" ></div>
+														<img src="{{ store.store_pic.url }}" style="height: 250px; width: 100%; object-fit: cover;"  alt="storepic" ></div>
 													{% else %} 
 													<div position="relative">
 													<img src="{% static 'images/macarons.jpg' %}" >
@@ -75,7 +58,7 @@
 							{% else %}
 								{% if store_list %}
 							  {% for store in store_list %}
-							 <div  class="col-4 col-6-medium col-12-small">
+							 <div  class="col-4 col-12-medium col-12-medium row aln-center ">
 
 									<!-- Feature -->
 									
@@ -83,9 +66,9 @@
 											<a href="{{ store.get_absolute_url }}" class="image featured">
 												{% if store.store_pic %}
 												<div position="relative">
-													<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" ></div>
+													<img src="{{ store.store_pic.url }}" style="height: 30%; width: 100%; object-fit: cover;"  alt="storepic" ></div>
 												{% else %} 
-												<div position="relative">
+											</div>
 												<img src="{% static 'images/macarons.jpg' %}" >
 												</div>
 												{% endif %}
@@ -97,7 +80,7 @@
 								</div>
 								{% endfor %}
 								{% else %}
-    							<p>There are no stores in db.</p>
+    							<p>There is no store.</p>
   							{% endif %}  
 							{% endif %}
 							
@@ -108,6 +91,7 @@
 								</ul>
 							</div>
 							{% endif %}
+							<br>
 						</div>
 					</div>
 				</div>

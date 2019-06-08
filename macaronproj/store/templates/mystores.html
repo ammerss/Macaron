@@ -3,18 +3,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE HTML>
-<!--
-	Strongly Typed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-	<head>
-		<title>Strongly Typed by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
-	</head>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
@@ -25,21 +14,22 @@
                         {% if store_list %} 
                             {% for store in store_list %}
                             <h3><a href= "{{ store.get_absolute_url }}"><strong>{{ store.name }}</strong></a></h3> 
-							<form method = "post" action="editmystore/{{store.id}}/">
+							<form method = "post" action="{% url 'store:editmystore' profile.user.id store.id %}">
                                     {% csrf_token %}
 							<div class="my_infobox" style="padding-left: 20%; padding-right: 20%">
 									<table width="100" cellpadding="3%" cellspacing="0" summary="가게 수정">
 										<colgroup>
 										</colgroup>
 										<tbody>
-																	
+													
+													{% if store.store_pic %}
+														<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="store thumbnail" >
+													{% endif %} 
+														
 												<tr>
-													<t>{% if store.store_pic %}
-																<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" >
-														{% endif %} </t>{{form.as_p}}
 													<th scope="row">Store name</th>
                                                     <div class= a name="StoreName" value= {{store.name}}></div>
-													<td><input type="text" name="storename" title="이름을 입력하세요" class="t_input" value = {{store.name}}></td>
+													<td><input type="text" name="storename" title="이름을 입력하세요" class="t_input " value = {{store.name}}></td>
 													<th scope="row">Phone num</th>
 													<td><input type="text" name="storenumber" title="번호를 입력하세요" class="t_input" value = {{store.num}}></td>
 												</tr>
@@ -50,11 +40,14 @@
 										</tbody>
                                     </table>
 									<button id="sub_btn" type="submit" value="Submit">Submit</button>
-                                </form>
+								</form>
+								<br><br><hr>
 							<br><br><br><br>
                                 </div>
                                
-                            {% endfor %}
+							{% endfor %}
+						{% else %}
+							<br><br><h5 class="inTitle">No store exists</h2>
                         {% endif %}
                             
 				</section>
