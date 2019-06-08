@@ -39,13 +39,9 @@
             <header>
               <h3>{{macaron.name}}</h3>
             </header>
-            <p>{{macaron.price}} won </p>
+            <p>{{macaron.price}} won <br>
             {{macaron.pic_content}}
-            <p>left : <strong>{{macaron.stock}}</strong></p>
-            <div class="col-4">
-              <input type="text" name="num_mac" placeholder="enter number"> 
-              <button type="submit" class="button icon "> Get </button>
-             </div>
+            left : <strong>{{macaron.stock}}</strong></p>
             
           </section>
          
@@ -56,14 +52,25 @@
          {% endif %}
       
       
+        </div>
       <div class="col-12">
           {% if user == store.owner %}
         <ul class="actions">
-          <li><a href="{% url 'store:edit' store.id%}" class="button icon fa-file">Add Macarons</a></li>
-        </ul>
+          <a href="{% url 'store:edit' store.id%}" class="button icon fa-file">Add Macarons</a></ul>
         {% endif %}
       </div>
+
+      <div>
+      <div class="col-12" class="actions" style="float:left; " >
+        <a href="" class="button icon fa-file">Make reservations</a>
+      </div>
+
+      <div class="col-12" class="actions" style="float:right;margin-inline-start: 20px">
+        <a href="" class="button icon fa-file">Reviews</a>
+      </div>
+
     </div>
+    
   </div>
 </section>
 {% endblock %}
