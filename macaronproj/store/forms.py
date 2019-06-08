@@ -5,9 +5,10 @@ from .models import Store
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Macarons
-        fields = ('pic_content', 'picture', )
+        fields = ('picture','pic_content',  )
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Store
         fields = ('store_pic', )
+        
