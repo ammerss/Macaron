@@ -43,7 +43,7 @@
 								</section>
 							</div>
 
-						<div class="row">
+						<div class="row" postion="center">
 								<div class="row aln-center">
 							{% if searched_stores %}
 							<p>search results for : {{ query }}</p>
@@ -73,8 +73,16 @@
 									<!-- Feature -->
 									
 										<section>
-											<a href="{{ store.get_absolute_url }}" class="image featured"><img src="{% static 'images/pic02.jpg' %}" alt="" >
-											<header>
+											<a href="{{ store.get_absolute_url }}" class="image featured">
+												{% if store.store_pic %}
+												<div position="relative">
+													<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" ></div>
+												{% else %}
+												<div position="relative">
+												<img src="{% static 'images/macarons.jpg' %}" >
+												</div>
+												{% endif %}
+												<header>
 													{{ store.name }}
 											</header></a>
 										</section>
