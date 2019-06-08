@@ -72,8 +72,8 @@ def mystores(request, user_id):
     if request.method == 'GET':
         profile = get_object_or_404(Profile, pk=user_id)
         stores = Store.objects.all().filter(owner=profile.user)
-    
-    return render(request, 'mystores.html', {'profile':profile, 'store_list' : stores})
+        form=ImageForm()
+    return render(request, 'mystores.html', {'profile':profile, 'store_list' : stores, 'form':form})
     
     
 
@@ -86,7 +86,9 @@ def editmystore(request, user_id , store_id):
         store.save()
         profile = get_object_or_404(Profile, pk=user_id)
         stores = Store.objects.all().filter(owner=profile.user)
-        return render(request,'mystores.html', {'profile':profile,'store_list' : stores})
+        #form=ImageForm()
+        #store.store_pic=form.save
+        return render(request,'mystores.html', {'profile':profile,'store_list' : stores,'form':form})
 
 # def upload_pic(request,pk):
 #     #content = get_object_or_404(Macarons, pk=pk)
