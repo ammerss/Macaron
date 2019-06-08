@@ -29,23 +29,25 @@
       
     <div class="row aln-center">
         {% for macaron in product_list %}
-      <div class="col-4 col-6-medium col-12-small">
+      <div class="col-18 col-6-medium col-12-small">
 
         <!-- Feature -->
         
-          <section>
+          
+            <article>
             <img src="{{macaron.picture.url}}" class="image featured" style="height:200px;width:200px;"alt="macaron pic" />
             
             <header>
               <h3>{{macaron.name}}</h3>
             </header>
-            <p>{{macaron.price}} won <br>
-            {{macaron.pic_content}}
-            left : <strong>{{macaron.stock}}</strong></p>
-            
-          </section>
+            <p>{{macaron.price}}won<br> 
+            {{macaron.pic_content}}<br>
+            stock : <strong>{{macaron.stock}}</strong></p>
+          </article>
+          
          
       </div>
+
          {% endfor %}
          {%if not product_list %}
          <p>There are no macarons yet!</p>
