@@ -2,31 +2,36 @@
 
 {% load staticfiles %}
 <!DOCTYPE HTML>
-<html>
+    <html lang="en">
+                <head>
+                  
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+                
+                  <title>Document</title>
+                </head>
+                <div id="page-wrapper">
 
     {% block content %}
 
     <section id="features">
         <div class="container">
+                
             <header>
-                <h2>Reservation lists of <strong>{{profile.user.username}}</strong></h2>
+                <h2><strong>Reservation list</strong></h2>
             </header>
-                <div class="row aln-center">
-                        <div class="col-12">
+            <div class="row aln-center">
+                    <div class="col-12">           
             <header>
                 <h3>check approval of your reservation!</h3>
             </header>
                 <p><strong>Without shop owner's approval, reservation is not done. 
                         so check approval of your reservation. After approval, you can't change it.</strong></p>
-        </div>
-
-    <input id="mode" name="mode" value="" type="hidden">
-    <input id="term" name="term" value="" type="hidden">
-    </form>
-
-    <div class="container">
-        <div class="row aln-center">
-    <table border="1" summary="">
+               
+        <table border="1" summary="">
             <colgroup>
                 <col style="width:100px;">
                 <col style="width:100px;">
@@ -35,20 +40,20 @@
                 <col style="width:100px;">
                 <col style="width:145px;">
                 <col style="width:135px;">
-    </colgroup>
-    <thead><tr>
-    <th scope="col">number</th>
-    <th scope="col">store name</th>
-    <th scope="col">macaron name</th>
-    <th scope="col">how many</th>
-    <th scope="col">price</th>
-    <th scope="col">due date and time</th>
-    <th scope="col">approval</th>
-    </tr></thead>
-    <tbody class="center ">
-        {% if reservation_list %}
-            {% for reservation in reservation_list%}
+            </colgroup>
+            {% if reservation_list %}
             <thead><tr>
+            <th scope="col">number</th>
+            <th scope="col">store name</th>
+            <th scope="col">macaron name</th>
+            <th scope="col">how many</th>
+            <th scope="col">price</th>
+            <th scope="col">due date and time</th>
+            <th scope="col">approval</th>
+            </tr></thead>
+            <tbody class="center ">
+            {% for reservation in reservation_list%}
+                <thead><tr>
                 <th scope="col">{{reservation.reser_num}}</th>
                 <th scope="col">{{reservation.shop_name}}</th>
                 <th scope="col">{{reservation.choice_macaron}}</th>
@@ -60,16 +65,20 @@
                         O
                         {% else %}
                         X 
-                        {%endif%}
-                    </th>
+                        {%endif%}</th>
                 </tr></thead>
             {%endfor%}
-        {% else %}
-        <p class="message displaynone">There is no reservation.</p>
-        {% endif %}     
-    </tbody>
-    </table>
-    </div>
-    </div>
-    {% endblock %}
+            {% else %}
+            <p class="message displaynone">There is no reservation.</p>
+            {% endif %}     
+            </tbody>
+        </table>
+        </div> 
+        </div> 
+</div>
+
+</div>
+{% endblock %}
+</body>
 </html>  
+<br><br>

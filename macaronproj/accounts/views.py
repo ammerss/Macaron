@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 def update_profile(request, user_id):
     user_data = User.objects.get(pk=user_id)
@@ -51,20 +53,27 @@ def logout(request):
 @login_required
 def editmypage(request, pk):
     if request.method == 'POST':
-        if request.POST['passwd'] == request.POST['repasswd']:
-            user = User.objects.get(id=pk)
-            if request.POST['type'] == "customer":
-                user.profile.user_type = False
-            else:
-                user.profile.user_type = True
-            user.set_password(request.POST['passwd'])
-            user.profile.name = request.POST['name']
-            user.profile.phone = request.POST['phone']
-            user.save()
-            return redirect('/')
+        if len(request.POST['passwd']) <= 0 or len(request.POST['repasswd']) <= 0 or len(request.POST['name']) <= 0 or len(request.POST['phone']) <= 0:
+            messages.success(request, 'Fill in the all blanks.')
+            return HttpResponseRedirect(reverse('accounts:editmypage', args=(pk,)))
         else:
-            profile = get_object_or_404(Profile, pk=pk)
-            return render(request, 'editmypage.html', {'profile':profile})
+            if request.POST['passwd'] == request.POST['repasswd']:
+                user = User.objects.get(id=pk)
+                if request.POST['type'] == "customer":
+                    user.profile.user_type = False
+                else:
+                    user.profile.user_type = True
+                user.set_password(request.POST['passwd'])
+                user.profile.name = request.POST['name']
+                user.profile.phone = request.POST['phone']
+                user.save()
+                auth.login(request,user)
+
+                profile = get_object_or_404(Profile, pk=pk)
+                return render(request, 'editmypage.html', {'profile':profile})
+            else:
+                messages.success(request, 'Please re-confirm your password.')
+                return HttpResponseRedirect(reverse('accounts:editmypage', args=(pk,)))
     else:
         profile = get_object_or_404(Profile, pk=pk)
         return render(request, 'editmypage.html', {'profile':profile})
