@@ -23,16 +23,15 @@ def request_reservation(request, pk):
     customer = request.user
     shop_name = get_object_or_404(Store, pk=pk)
 
-    quantity = int(request.POST.get('quantity'))
-    if quantity == 0:
-        messages.error(request, 'ERROR: Please fill the form of COUNT')
-        return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
-
     macaron_name = request.POST.get('choice')
     if not macaron_name:
         messages.error(request, 'ERROR: Please choice MACARON TYPE!')
         return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
     
+    quantity = int(request.POST.get(macaron_name))
+    if quantity == 0:
+        messages.error(request, 'ERROR: Please fill the form of COUNT')
+        return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
 
     reser_request_time = timezone.datetime.now()
     #convert date value and time value to Datetime form
@@ -56,6 +55,9 @@ def request_reservation(request, pk):
         for macaron in macaron_list:
             if macaron.name == macaron_name:
                 price = macaron.price
+                if quantity > macaron.stock:
+                    messages.error(request, "ERROR: You can only reserve less than left macaron")
+                    return HttpResponseRedirect(reverse('reservation:reserve', args=(pk,)))
                 macaron.stock -= quantity
                 macaron.save()
                 break
