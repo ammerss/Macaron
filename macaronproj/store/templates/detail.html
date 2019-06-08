@@ -64,11 +64,11 @@
 
       <div>
       <div class="col-12" class="actions" style="float:left; " >
-        <a href="" class="button icon fa-file">Make reservations</a>
+        <a href="{% url 'reservation:reserve' store.id %}" class="button icon fa-file">Make reservations</a>
       </div>
 
       <div class="col-12" class="actions" style="float:right;margin-inline-start: 20px">
-        <a href="" class="button icon fa-file">Reviews</a>
+        <a href="{% url 'review:review' store.id %}" class="button icon fa-file">Reviews</a>
       </div>
 
     </div>
