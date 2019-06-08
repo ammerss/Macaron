@@ -24,12 +24,9 @@
 							<nav id="nav">
 								<ul>
 									{% if user.is_authenticated %}
-										Welcome {{user.profile.name}}
-										<form action = "{% url 'accounts:logout' %}" method="POST">
-											{% csrf_token %}
-											<input type="submit" value="로그아웃">
-										</form>
+										<li><a class="icon fa-home" href="{% url 'accounts:logout' %}"><span>Sign Out</span></a></li>
 										<li><a class="icon fa-cog" href="{% url 'accounts:mypage' user.id %}"><span>My Page</span></a></li>
+										<li><a class="icon fa-sitemap" href="{% url 'home' %}"><span>Home</span></a></li>
 									{% else %}
 										<li><a class="icon fa-home" href="{% url 'accounts:signup' %}"><span>Sign Up</span></a></li>
 										<li><a href="{% url 'accounts:login' %}" class="icon fa-bar-chart-o"><span>Sign In</span></a></li>
