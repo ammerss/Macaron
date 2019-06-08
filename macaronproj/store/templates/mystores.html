@@ -24,7 +24,7 @@
 					<h2 class="inTitle">Which store do you want do edit?</h2>
                         {% if store_list %} 
                             {% for store in store_list %}
-                            <p><a href= "{{ store.get_absolute_url }}">{{ store.name }}</a></p> 
+                            <h3><a href= "{{ store.get_absolute_url }}"><strong>{{ store.name }}</strong></a></h3> 
 							<form method = "post" action="editmystore/{{store.id}}/">
                                     {% csrf_token %}
 							<div class="my_infobox" style="padding-left: 20%; padding-right: 20%">
@@ -34,7 +34,10 @@
 										<tbody>
 																	
 												<tr>
-                                                    <th scope="row">Store name</th>
+													<t>{% if store.store_pic %}
+																<img src="{{ store.store_pic.url }}" style="height:230px;width:350px;"  alt="storepic" >
+														{% endif %} </t>{{form.as_p}}
+													<th scope="row">Store name</th>
                                                     <div class= a name="StoreName" value= {{store.name}}></div>
 													<td><input type="text" name="storename" title="이름을 입력하세요" class="t_input" value = {{store.name}}></td>
 													<th scope="row">Phone num</th>
@@ -48,7 +51,7 @@
                                     </table>
 									<button id="sub_btn" type="submit" value="Submit">Submit</button>
                                 </form>
-							<br><br>
+							<br><br><br><br>
                                 </div>
                                
                             {% endfor %}
