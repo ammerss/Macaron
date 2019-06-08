@@ -14,10 +14,17 @@
   <title>Document</title>
 </head>
 <div id="page-wrapper">
+<<<<<<< HEAD
     {%block logoname %}<a href="#">{{ store.name }}</a>{%endblock%}
     {% block logo_script %}
     <p> {{ store.num }}</p>
     <p>{{store.content}}</p>
+=======
+    {% block logoname %}{{ store.name }}{%endblock%}
+    {% block logo_script %}<br>
+    <p> {{ store.num }}<br>
+    {{store.content}}</p>
+>>>>>>> 98899a325eeb951893af8fe629c11029dbc3c71b
     {% endblock %}
 {% block content %}
 
@@ -29,23 +36,25 @@
       
     <div class="row aln-center">
         {% for macaron in product_list %}
-      <div class="col-4 col-6-medium col-12-small">
+      <div class="col-18 col-6-medium col-12-small">
 
         <!-- Feature -->
         
-          <section>
+          
+            <article>
             <img src="{{macaron.picture.url}}" class="image featured" style="height:200px;width:200px;"alt="macaron pic" />
             
             <header>
               <h3>{{macaron.name}}</h3>
             </header>
-            <p>{{macaron.price}} won <br>
-            {{macaron.pic_content}}
-            left : <strong>{{macaron.stock}}</strong></p>
-            
-          </section>
+            <p>{{macaron.price}}won<br> 
+            {{macaron.pic_content}}<br>
+            stock : <strong>{{macaron.stock}}</strong></p>
+          </article>
+          
          
       </div>
+
          {% endfor %}
          {%if not product_list %}
          <p>There are no macarons yet!</p>
@@ -62,11 +71,11 @@
 
       <div>
       <div class="col-12" class="actions" style="float:left; " >
-        <a href="" class="button icon fa-file">Make reservations</a>
+        <a href="{% url 'reservation:reserve' store.id %}" class="button icon fa-file">Make reservations</a>
       </div>
 
       <div class="col-12" class="actions" style="float:right;margin-inline-start: 20px">
-        <a href="" class="button icon fa-file">Reviews</a>
+        <a href="{% url 'review:review' store.id %}" class="button icon fa-file">Reviews</a>
       </div>
 
     </div>
