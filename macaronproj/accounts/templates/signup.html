@@ -1,1 +1,96 @@
-<h1>회원가입 페이지 입니다.</h1>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+{% if error %}
+    {{ error }}
+    <br><br>
+{% endif %}
+
+{% block content %}
+	<style>
+		form input[type="tel"]{
+			-moz-transition: background-color 0.25s ease-in-out;
+			-webkit-transition: background-color 0.25s ease-in-out;
+			-ms-transition: background-color 0.25s ease-in-out;
+			transition: background-color 0.25s ease-in-out;
+			-webkit-appearance: none;
+			display: block;
+			border: 0;
+			background: #e8e8e8;
+			width: 100%;
+			box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			line-height: 1.25em;
+			padding: 0.75em 1em 0.75em 1em;
+		}
+
+		div.radio-wrap {
+		display: inline-flex;
+		align-items: center;
+		}
+
+		input[type='radio'],
+		input[type='radio']:checked {
+		appearance: none;
+		width: 0.9rem;
+		height: 0.9rem;
+		border-radius: 100%;
+		margin-right: 0.1rem;
+		}
+
+		input[type='radio'] {
+		background-color: #e8e8e8;
+		}
+		input[type='radio']:checked {
+		background-color: #ed786a;
+		}
+	</style>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<section>
+									{% if fail %}
+										<div class="alert alert-danger" role="alert">
+											Please check your password!
+										</div>
+									{% endif %}
+									<h1 style="font-size: 70px">
+										SIGN UP
+									</h1><br><br>
+									<form method="POST">
+										{% csrf_token %}
+										Username : <input type = "text" name = "username"><br>
+										Password : <input type = "password" name = "password1"><br>
+										Password Confirmation : <input type = "password" name = "password2"><br>
+										Name : <input type = "text" name = "name" placeholder="First Name, Last Name"><br>
+										Phone Number : <input type= "tel" name="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-xxxx-xxxx"><br>
+										E-mail Address : <input type = "email" name = "email"><br>
+										<div class="radio-wrap">
+											<input type="radio" name="type" value="customer"> Customer
+										</div>
+										<div class="radio-wrap">
+											<input type="radio" name="type" value="owner"> Owner
+										</div> <br><br>
+										<input type = "submit" value = "Sign Up!">
+									</form>
+								</section>
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+	</body>
+{% endblock %}

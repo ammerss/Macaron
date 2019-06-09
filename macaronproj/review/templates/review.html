@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+
+{% block content %}
+    <section id="header">
+        <header>
+            <div><h2>Review List</h2></div>
+        </header>
+    </section>
+    <section id="feadtures">
+    <div class=contianer style="padding-left: 10%; padding-right: 10%">
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Title</th>
+                    <th style="text-align: center;">Writer</th>
+                    <th style="text-align: center;">Date</th>
+                </tr>
+                <tr>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if review_text.all %}
+                    {% for text in review_text.all %}
+                <tr style=" text-align:center; background: white">
+                    <td width="60%" ><strong>{{text.title}}</strong></td>
+                    <td width="10%">{{text.writer}}</td>
+                    <td width="30%">{{text.post_date}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="padding-left: 10%; padding-right: 10%">{{text.content}}</td>
+                </tr>
+                  {% endfor %}
+                {% else %}
+                 <p>There are no reviews</p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="row aln-center"><h2>Write your review!</h2></div>
+    <div class="container">
+        <form action = "{% url 'review:post_review' store.id %}" method = "POST">
+            {% csrf_token %}
+            <div class="container">
+                <input type="text" name = "head"  placeholder="Write title" ></textarea>
+                <textarea name = "body"  placeholder="Write content"></textarea>
+            </div>
+            <br>
+            <div class="btn_center" style="padding-left: 90%; padding-right: 10%">
+                    <p>
+                    <input class="btn_s" type="submit" value="POST">
+                    </p>
+            </div>
+
+            {% if messages %}
+            <ul class="messages">
+                 {% for message in messages %}
+                 <script>
+                        alert('{{message}}')
+                </script>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
+    </div>
+    </section>
+
+{% endblock %}
+
+</html>

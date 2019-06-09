@@ -1,1 +1,91 @@
-<h1>소비자들의 예약확인 페이지 입니다.</h1>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!DOCTYPE HTML>
+    <html lang="en">
+                <head>
+                  
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+                
+                  <title>Document</title>
+                </head>
+                <div id="page-wrapper">
+
+    {% block content %}
+
+    <section id="features">
+        <div class="container">
+                
+            <header>
+                <h2><strong>Reservation list</strong></h2>
+            </header>
+            <br>
+            <div class="row aln-center">
+                    <div class="col-12">           
+            <header>
+                <h4>check approval of your reservation!</h4>
+            </header>
+            <br>
+                <p>Without shop owner's approval, reservation is not done. 
+                        <br>Please check approval of your reservation. After approval, you cannot change your reservation.</p>
+               
+                        <br>
+        <table border="1" summary="">
+            <colgroup>
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:145px;">
+                <col style="width:135px;">
+            </colgroup>
+            {% if reservation_list %}
+            <thead><tr>
+            <th scope="col">number</th>
+            <th scope="col">store name</th>
+            <th scope="col">macaron name</th>
+            <th scope="col">how many</th>
+            <th scope="col">price</th>
+            <th scope="col">due date and time</th>
+            <th scope="col">approval</th>
+            </tr></thead>
+            <tbody class="center ">
+            {% for reservation in reservation_list%}
+                <thead><tr>
+                <th scope="col">{{reservation.reser_num}}</th>
+                <th scope="col">{{reservation.shop_name}}</th>
+                <th scope="col">{{reservation.choice_macaron}}</th>
+                <th scope="col">{{reservation.quantity}}</th>
+                <th scope="col">{{reservation.amount}}</th>
+                <th scope="col">{{reservation.reser_time}}</th>
+                <th scope="col"> 
+                        {% if reservation.approve == 0 %}
+                        wait for approval
+                        {% else %}
+                            {% if reservation.approve == 1 %}
+                            O
+                            {% else %}
+                            X
+                            {%endif%}     
+                        {%endif%}</th>
+                </tr></thead>
+            {%endfor%}
+            {% else %}
+            <p class="message displaynone">There is no reservation.</p>
+            {% endif %}     
+            </tbody>
+        </table>
+        </div> 
+        </div> 
+</div>
+
+</div>
+{% endblock %}
+</body>
+</html>  
+<br><br>

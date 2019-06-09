@@ -1,1 +1,126 @@
-<h1>마카롱 가게 리스트 보여주는 메인 페이지 입니다.</h1>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			{% block content %}
+
+			<!-- Features -->
+				<section id="features">
+					<div class="container">
+						<div class=" col-12 col-12-medium">
+								<section>
+									<form method="get" action="">
+
+										<div position="center" class="row  col-12 col-6-small aln-center margin-bottom-4" style="margin-left: auto">
+												<input name="search" placeholder="search stores" type="text"  >
+												<span><button type="submit" class="form-button-submit button icon fa-search  input_store" style="">Search</button>
+											</i></span>
+										</div>
+									</form>
+								</section>
+							</div>
+							<br><br>
+						<div class="row aln-center" postion="center" >
+							<div class="row ">
+							{% if searched_stores %}
+							<p>search results for : {{ query }}</p>
+							  {% for store in searched_stores %}
+								<div class="col-4 col-4-medium col-4-small row aln-center ">
+
+									<!-- Feature -->
+									
+										<section>
+											
+											<a href="{{ store.get_absolute_url }}" class="image featured">
+													{% if store.store_pic %}
+													<div position="relative">
+														<img src="{{ store.store_pic.url }}" style="height: 250px; width: 100%; object-fit: cover;"  alt="storepic" ></div>
+													{% else %} 
+													<div position="relative">
+													<img src="{% static 'images/macarons.jpg' %}" >
+													</div>
+													{% endif %}
+												<header style="color:black">
+												<h3>{{ store.name }}</h3>
+											</header></a>
+											
+										</section>
+	
+								</div>
+								{% empty %}
+    							<p>No stores found</p>>
+							  {% endfor %}
+							{% else %}
+								{% if store_list %}
+							  {% for store in store_list %}
+							 <div  class="col-4 col-12-medium col-12-medium row aln-center ">
+
+									<!-- Feature -->
+									
+										<section>
+											<a href="{{ store.get_absolute_url }}" class="image featured">
+												{% if store.store_pic %}
+												<div position="relative">
+													<img src="{{ store.store_pic.url }}" style="height: 30%; width: 100%; object-fit: cover;"  alt="storepic" ></div>
+												{% else %} 
+											</div>
+												<img src="{% static 'images/macarons.jpg' %}" >
+												</div>
+												{% endif %}
+												<header style="color:black">
+													{{ store.name }}
+											</header></a>
+										</section>
+	
+								</div>
+								{% endfor %}
+								{% else %}
+    							<p>There is no store.</p>
+  							{% endif %}  
+							{% endif %}
+							
+							{% if user.profile.user_type %}
+							<div class="col-12">
+								<ul class="actions">
+									<li><a href="{%  url 'store:new' %}" class="button icon fa-file">Make a Store</a></li>
+								</ul>
+							</div>
+							{% endif %}
+							<br>
+						</div>
+					</div>
+				</div>
+				</section>
+<!--
+		
+				<section id="banner">
+					<div class="container">
+						<p>Use this space for <strong>profound thoughts</strong>.<br />
+						Or an enormous ad. Whatever.</p>
+					</div>
+				</section>-->
+		
+			<!-- Main -->
+				
+				{% endblock %}
+		
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
+<br><br>
+
+
+
+
