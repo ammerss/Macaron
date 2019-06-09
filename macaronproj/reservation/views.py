@@ -46,7 +46,8 @@ def request_reservation(request, pk):
     if request.method == 'POST':
         reservation = Reservation()
         count += 1
-        reservation.reser_num = count
+        if(count>999): count = 1
+        reservation.reser_num = int(reser_request_time.strftime('%Y%m%d') + str(shop_name.id).zfill(4) + str(count).zfill(3))
         reservation.customer = customer
         reservation.shop_name = shop_name
         reservation.quantity = quantity
@@ -100,6 +101,6 @@ def approve(request, pk):
                     macaron.stock += reservation.quantity
                     macaron.save()
                     break
-        return render(request, 'approve.html', {'reservation': reservation} )                
-    return render(request, 'approve.html', {'reservation': reservation})
+    pk=reservation.shop_name.id                    
+    return HttpResponseRedirect(reverse('reservation:Reser_owner', args=(pk,)))
    
