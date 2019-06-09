@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, AbstractUser
 from store.models import Store
 
 class Reservation(models.Model):
-    reser_num = models.IntegerField(primary_key=True,max_length=20, default='')
+    reser_num = models.BigIntegerField(primary_key=True, default=0)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     shop_name = models.ForeignKey(Store, on_delete=models.CASCADE, default=0 )
     choice_macaron = models.CharField(max_length=10, default='')

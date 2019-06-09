@@ -82,10 +82,10 @@
                         <h5>no image</h5>
                      {% endif%}
                             <h4><div class="radio-wrap">
-                                <input type="radio" name="choice" value={{macaron.name}}>
+                                <input type="radio" name="choice" value="{{macaron.name}}">
                             </div>
                             Name: {{macaron.name}} | Price: {{macaron.price}} | Left: {{macaron.stock}}
-                            &nbsp; &nbsp; &nbsp; &nbsp; Count: <input type="number" name={{macaron.name}} min="0" max="30" step="1" value=0 style="			border: 0;
+                            &nbsp; &nbsp; &nbsp; &nbsp; Count: <input type="number" name="{{macaron.name}}" min="0" max="30" step="1" value=0 style="			border: 0;
                             background: #e8e8e8;
                             width: 15%;
                             box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
