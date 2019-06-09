@@ -44,7 +44,9 @@
               <div style="width:inherit;line-break:auto;max-width:200px;word-break: break-all ;white-space:normal ;">
             {{macaron.pic_content}}</div><br>
             stock : <strong>{{macaron.stock}}</strong></div><br>
+            {% if user == store.owner %}
             <a href="{% url 'store:delete' store.id macaron.id%}" class="button">Delete</a>
+             {% endif %}
           </article>
           
           
