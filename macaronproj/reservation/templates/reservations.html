@@ -17,6 +17,29 @@
 
     {% block content %}
 
+    <style>
+        div.radio-wrap {
+        display: inline-flex;
+        align-items: center;
+        }
+
+        input[type='radio'],
+        input[type='radio']:checked {
+        appearance: none;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 100%;
+        margin-right: 0.1rem;
+        }
+
+        input[type='radio'] {
+        background-color: #e8e8e8;
+        }
+        input[type='radio']:checked {
+        background-color: #ed786a;
+        }
+    </style>
+
     <section id="features">
         <div class="container">
             <header>
@@ -64,8 +87,17 @@
             <th scope="col">{{reservation.amount}}</th>
             <th scope="col">{{reservation.reser_time}}</th>
             <th scope="col">
-                {% if reservation.approve == 0 %}
-                <a href="{%  url 'reservation:approve' reservation.reser_num  %}"><button> approve or reject </button></a>   
+                {% if reservation.approve == 0 %}     
+                <form action="{%  url 'reservation:approve' reservation.reser_num  %}" method="POST">
+                {% csrf_token %}
+                <div class="radio-wrap">
+                <input type="radio" name="type" value="approve"> approve
+                </div>
+                <div class="radio-wrap">
+                <input type="radio" name="type" value="reject"> reject
+                </div>        
+                <input type = "submit" value = "submit">
+                </form> 
                 {% else %}
                     {% if reservation.approve == 1 %}
                     approved
