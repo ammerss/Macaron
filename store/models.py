@@ -8,7 +8,7 @@ class Store(models.Model):
     name=models.CharField(max_length=20)
     num=models.CharField(max_length=20)
     content = models.TextField()
-    store_pic = models.ImageField(blank=False, upload_to="images/%Y/%m/%d")
+    store_pic = models.ImageField(blank=False, upload_to="images/")
     owner=models.ForeignKey(User,editable=False,on_delete=models.CASCADE,default='1')
 
     def __str__(self):
