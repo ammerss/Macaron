@@ -25,24 +25,25 @@
 <section id="features">
   <div class="container">
     
-    <div class="row">
+    <div class="row ">
       
     <div class="row aln-center">
         {% for macaron in product_list %}
-      <div class="col-18 col-6-medium col-12-small">
+      <div class="col-18 col-6-medium col-12-small "position="center">
 
         <!-- Feature -->
         
           
             <article>
-            <img src="{{macaron.picture.url}}" class="image featured" style="height:200px;width:200px;"alt="macaron pic" />
+            <img src="{{macaron.picture.url}}" class="image featured" style="height:200px;width:200px ;"alt="macaron pic" />
             
-            <header>
+            <header >
               <h3>{{macaron.name}}</h3>
             </header>
-            <p>{{macaron.price}}won<br> 
-            {{macaron.pic_content}}<br>
-            stock : <strong>{{macaron.stock}}</strong></p>
+            <div >{{macaron.price}}won<br> 
+              <div style="width:inherit;line-break:auto;max-width:200px;word-break: break-all ;white-space:normal ;">
+            {{macaron.pic_content}}</div><br>
+            stock : <strong>{{macaron.stock}}</strong></div>
           </article>
           
          
