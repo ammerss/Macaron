@@ -43,8 +43,10 @@
             <div >{{macaron.price}}won<br> 
               <div style="width:inherit;line-break:auto;max-width:200px;word-break: break-all ;white-space:normal ;">
             {{macaron.pic_content}}</div><br>
-            stock : <strong>{{macaron.stock}}</strong></div>
+            stock : <strong>{{macaron.stock}}</strong></div><br>
+            <a href="{% url 'store:delete' store.id macaron.id%}" class="button">Delete</a>
           </article>
+          
           
          
       </div>

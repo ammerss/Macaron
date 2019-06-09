@@ -13,5 +13,6 @@ urlpatterns = [
    path('create/', store.views.create_store, name='create_store'),
    path('mystores/<int:user_id>/editmystore/<int:store_id>/', store.views.editmystore,name='editmystore'),
    path('mystores/<int:user_id>/', store.views.mystores, name='mystores'),
+   path('detail/<int:store_id>/delete/<int:macarons_id>',store.views.delete, name='delete'),
    # path('upload_pic/<int:pk>', store.views.upload_pic, name='upload_pic'),
 ]

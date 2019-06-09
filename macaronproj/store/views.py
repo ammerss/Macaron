@@ -26,7 +26,6 @@ def home(request):
 def detail(request,pk):
     store=get_object_or_404(Store, pk=pk)
     product_list = store.macarons_set.all()
-    #product_list = Macarons.objects.filter(store=store.name)
     return render(request,'detail.html',{'product_list':product_list,'store':store})
 
 def edit(request,pk):
@@ -92,7 +91,14 @@ def editmystore(request, user_id , store_id):
         stores = Store.objects.all().filter(owner=profile.user)
         #form=ImageForm()
         #store.store_pic=form.save
-        return render(request,'mystores.html', {'profile':profile,'store_list' : stores})
+        return render(request, 'mystores.html', {'profile': profile, 'store_list': stores})
+        
+def delete(request, store_id, macarons_id):
+        macaron = get_object_or_404(Macarons, pk=macarons_id)
+        macaron.delete()
+        messages.success(request, "Deleted Successfully")
+        return HttpResponseRedirect(reverse('store:detail',kwargs={'pk':store_id}))
+        
 
 # def upload_pic(request,pk):
 #     #content = get_object_or_404(Macarons, pk=pk)
