@@ -1,1 +1,0 @@
-web: gunicorn macaronproj.wsgi --log-file -
