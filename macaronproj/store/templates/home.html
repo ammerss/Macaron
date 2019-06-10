@@ -66,7 +66,8 @@
 											<a href="{{ store.get_absolute_url }}" class="image featured">
 												{% if store.store_pic %}
 												<div position="relative">
-													<img src="{{ store.store_pic.url }}" style="height: 30%; width: 100%; object-fit: cover;"  alt="storepic" ></div>
+													
+													<img src="{% static '가게 사진.jpeg' %}" style="height: 30%; width: 100%; object-fit: cover;"  alt="storepic" ></div>
 												{% else %} 
 											</div>
 												<img src="{% static 'images/macarons.jpg' %}" >

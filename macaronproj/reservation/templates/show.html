@@ -76,7 +76,7 @@
                     {% for macaron in product_list %}
                     {%if macaron.picture %}
                     
-                     <img src="{{macaron.picture.url}}" height=300 alt="no image"> 
+                     <img src="{% static '마카롱 사진.jpeg' %}" height=300 alt="no image"> 
                         <h6>{{macaron.pic_content}}</h6>
                     {% else %}
                         <h5>no image</h5>
