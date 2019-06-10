@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Store</title>
+</head>
+
+{% block content %}
+<div>
+    <div id="page-wrapper">
+        <section id="features">
+			<div class="container">
+                 <h1 style="font-size:40px">REGISTER MY STORE</h1>
+            </div>
+        </section>
+    </div>
+
+  
+     <form style="margin:auto; width:60%; margin-top:5%;" method="post" enctype="multipart/form-data" action="{% url 'store:create_store' %}">
+     {% csrf_token %}
+     {{form.as_p}}
+     <input required type="text" name="name" placeholder="STORE NAME"><br>
+     <input required type="text" name="number" placeholder="STORE NUMBER (XXX-XXXX-XXXX)"><br>
+     <textarea cols="30" row="10" name="body" placeholder="ENTER INTRODUCTION" required></textarea><br>
+     
+        <div style="margin-left:80%;">
+	    	<ul class="actions">
+            <input type="submit", value="REGISTER">
+            </ul>
+	    </div>
+      
+     </form>
+
+</div>
+{% endblock %}
+</html>

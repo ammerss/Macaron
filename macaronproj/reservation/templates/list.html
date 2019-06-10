@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+                <head>
+                  
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+                
+                  <title>Document</title>
+                </head>
+                <div id="page-wrapper">
+
+    {% block content %}
+
+    <section id="features">
+        <div class="container">
+            <h2>Reservation lists of the Store of <strong>{{profile.user.username}}</strong></h2>
+                <div class="row aln-center">
+                    <div class="col-12">
+                        <br>
+                        <h4>Store list</h4>
+                        <br>
+                        <p>Check your reservation of each store!</p>
+                        {% if store_list %} 
+                            {% for store in store_list %}
+                                <br>
+                                <a href="{%  url 'reservation:Reser_owner' store.id  %}"><button> reservation of {{ store.name }} </button></a>
+                                <br>
+                            {% endfor %} 
+                        {% endif %} 
+                    </div>
+                </div>
+        </section>
+</html>  
+{% endblock %}
