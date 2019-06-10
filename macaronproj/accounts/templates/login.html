@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% if error %}
+    {{ error }}
+    <br><br>
+{% endif %}
+{% block content %}
+
+<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<section>
+                                    {% if fail %}
+										<div class="alert alert-danger" role="alert">
+											Please check your username or password!
+										</div>
+									{% endif %}
+									<h1 style="font-size: 70px">
+										SIGN IN
+									</h1><br><br>
+									<form method="POST">
+										{% csrf_token %}
+										Username : <input type = "text" name = "username"><br>
+										Password : <input type = "password" name = "password"><br>
+										<input type = "submit" value = "Sign In!">
+									</form>
+								</section>
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>            
+	</body>
+{% endblock %}

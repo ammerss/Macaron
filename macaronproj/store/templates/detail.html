@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" type = "text/css" href="{% static 'assets/css/main.css' %}" />
+
+  <title>Document</title>
+</head>
+<div id="page-wrapper">
+    {% block logoname %}{{ store.name }}{%endblock%}
+    {% block logo_script %}<br>
+    <p> {{ store.num }}<br>
+    {{store.content}}</p>
+    {% endblock %}
+{% block content %}
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    
+    <div class="row ">
+      
+    <div class="row aln-center">
+        {% for macaron in product_list %}
+      <div class="col-18 col-6-medium col-12-small "position="center">
+
+        <!-- Feature -->
+        
+          
+            <article>
+            <img src="{{macaron.picture.url}}" class="image featured" style="height:200px;width:200px ;"alt="macaron pic" />
+            
+            <header >
+              <h3>{{macaron.name}}</h3>
+            </header>
+            <div >{{macaron.price}}won<br> 
+              <div style="width:inherit;line-break:auto;max-width:200px;word-break: break-all ;white-space:normal ;">
+            {{macaron.pic_content}}</div><br>
+            stock : <strong>{{macaron.stock}}</strong></div><br>
+            {% if user == store.owner %}
+            <a href="{% url 'store:delete' store.id macaron.id%}" class="button">Delete</a>
+             {% endif %}
+          </article>
+          
+          
+         
+      </div>
+
+         {% endfor %}
+        {%if not product_list %}
+            <br><br><h5 class="inTitle">No macaron exists</h2>
+        {% else %}
+        <div class="col-12" class="actions" style="float:left" >
+          <a href="{% url 'reservation:reserve' store.id %}" class="button">Make reservations</a>
+          <a href="{% url 'review:review' store.id %}" class="button">Reviews</a>
+        </div>
+        {% endif %}
+      
+      
+        </div>
+      <div class="col-12">
+          {% if user == store.owner %}
+        <ul class="actions">
+          <a href="{% url 'store:edit' store.id%}" class="button">Add Macarons</a></ul>
+        {% endif %}
+      </div>
+
+      <div>
+      
+
+    </div>
+    
+  </div>
+</section>
+{% endblock %}
+</div>
+</html>
+
+
+
+
